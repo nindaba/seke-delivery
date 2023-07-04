@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfc128a1-f6a2-4a29-8fbc-c9131467f0cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/seke-data/src/main/java/bi/seke/data/VehicleData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/hybrisProjectSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/hybrisProjectSettings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/install.sh" beforeDir="false" afterPath="$PROJECT_DIR$/install.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.0/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -18,6 +16,9 @@
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/gateway">
       <ProjectState />
     </projectState>
   </component>
@@ -39,24 +40,6 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="seke-delivery" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="seke-delivery" type="f1a62948:ProjectNode" />
-                <item name="seke-data" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="seke-delivery" type="f1a62948:ProjectNode" />
-                <item name="seke-data" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="seke-delivery" type="f1a62948:ProjectNode" />
-                <item name="seke-data" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -102,7 +85,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "development",
+    "jdk.selected.JAVA_MODULE": "17",
     "last_directory_selection": "/Users/nindaba/Documents/self/ms/seke-delivery/seke-data/src/main/java",
     "last_opened_file_path": "/Users/nindaba/Documents/self/ms/seke-delivery",
     "node.js.detected.package.eslint": "true",
@@ -243,6 +227,20 @@
       <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
+    <configuration name="GatewayApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="seke-delivery.gateway.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="bi.seke.gateway.GatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="seke-delivery.gateway.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="bi.seke.gateway.GatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="VehicleServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="ACTIVE_PROFILES" value="prod" />
       <module name="seke-delivery.vehicle-service.main" />
@@ -281,6 +279,7 @@
       <workItem from="1688079937626" duration="227000" />
       <workItem from="1688080185038" duration="6839000" />
       <workItem from="1688231450737" duration="1341000" />
+      <workItem from="1688447858337" duration="2974000" />
     </task>
     <servers />
   </component>

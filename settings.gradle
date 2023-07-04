@@ -1,5 +1,5 @@
 rootProject.name = 'seke-delivery'
 
 include 'vehicle-service'
-//include 'seke-gateway'
+include 'gateway'
 include 'seke-data'

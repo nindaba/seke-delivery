@@ -87,7 +87,17 @@
     </option>
     <option name="moduleSettings">
       <map>
+        <entry key="gateway">
+          <value>
+            <ModuleSettings />
+          </value>
+        </entry>
         <entry key="seke-delivery">
+          <value>
+            <ModuleSettings />
+          </value>
+        </entry>
+        <entry key="seke-delivery.gateway.main">
           <value>
             <ModuleSettings />
           </value>
