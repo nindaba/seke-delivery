@@ -34,3 +34,11 @@ dependencyManagement {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+tasks.named('bootBuildImage') {
+    disabled = true
+}
+
+tasks.named('bootBuild'){
+    disabled = true;
+}

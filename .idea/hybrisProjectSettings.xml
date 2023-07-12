@@ -97,6 +97,11 @@
             <ModuleSettings />
           </value>
         </entry>
+        <entry key="seke-delivery.gateway">
+          <value>
+            <ModuleSettings />
+          </value>
+        </entry>
         <entry key="seke-delivery.gateway.main">
           <value>
             <ModuleSettings />
