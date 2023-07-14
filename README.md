@@ -1,5 +1,16 @@
 # Seke delivery [Architecture]
 
+## Resources In This Documentation
+
+* [Seke Gateway](https://github.com/nindaba/seke-delivery#seke-gateway)
+* [Delivery Service](https://github.com/nindaba/seke-delivery#seke-gateway)
+* [Pricing Service](https://github.com/nindaba/seke-delivery#pricing-service)
+* [Warehouse Service](https://github.com/nindaba/seke-delivery#warehouse-service)
+* [Lockers Service](https://github.com/nindaba/seke-delivery#lockers-service)
+* [Users Service](https://github.com/nindaba/seke-delivery#users-service)
+* [Payment Service](https://github.com/nindaba/seke-delivery#payment-service)
+* [Drivers Service](https://github.com/nindaba/seke-delivery#drivers-service)
+
 ## Seke Gateway
 
 <img src="./design/seke-gateway.svg">
@@ -80,15 +91,43 @@ configuration
 
 ### `/warehouses`
 
-This service will hold the records of the deliveris which are in a specific warehouse , and update the tracking once it
+This service will hold the records of the deliveries which are in a specific warehouse, and update the tracking once it
 is arrived or left the warehouse
 
 It should also be able to calculate the route by
 
 * checks if the delivery will be picked or handled to a warehouse
 * if the distance is longer than the CONFIGURED, to break the route to a warehouse
-* the source and destination of the delivery and checks if there is a wharehouses closer to the source or destination
-* if the warehouse has packages which is going in the same reagoin apart from the warehouse it self
+* the source and destination of the delivery and checks if there is a warehouses closer to the source or destination
+* if the warehouse has packages which is going in the same region apart from the warehouse itself
+
+| Type Of Delivery | Duration-Distance     |
+|------------------|-----------------------|
+| EXPRESS          | 2.5 h    for 10 km    |
+| FAST             | 5h       for 10 km    |
+| NORMAL           | 24h      for 30 km    |
+| BASIC            | 48h      for > 150 Km |
+
+Once warehouses which will be included in the route have been found, it will arrange them in order and add them to the
+route, where each warehouse will be a route entry
+
+### `/wharehouses/drivers`
+
+The warehouse service consumes Drivers online Topic, once a driver is online it will store the driver in `REDIS` and
+when a package to be delivered. it will notify all the drivers.
+
+When the driver comes online, it should also check the packages that needs to be delivered and if found, it should send
+notification by
+
+* finding a warehouse which is closer to the driver
+* checking packages in that warehouse to be delivered
+* comparing the destination of the driver and package
+* if the distance between is in configured range, then notify
+
+| Driver Destination Range Configuration | Distance     |
+|----------------------------------------|--------------|
+| DEFAULT                                | 2 km         |
+| ${TOWN_NAME}                           | ${NUMBER} km |
 
 ## Lockers Service
 
@@ -96,18 +135,36 @@ It should also be able to calculate the route by
 
 ### `/lokers`
 
-This service will hold the records of the deliveris which are in a specific locker , and update the tracking
+This service will hold the records of the deliveries which are in a specific locker, and update the tracking
 once it is arrived or left the locker
-it will also keep records of all the lokers and there status and create keys evertime it needs to be accessed
+it will also keep records of all the lookers and there status and create keys everytime it needs to be accessed
 
 ### `/lokers/{locker-uid}/boxes/{box-uid}`
 
 This wil keep the information of the boxes in the loker and manage the delivery status
 
-### `/address/lockers`
+### `/lockers/address`
 
-This will register a loker in location, or get lockers in that specific location
+This will register a locker in location and get lockers in that specific location
 this will also return there statuses, if they are fully occupied or some are free
+
+### `/lokers/drivers`
+
+The locker service consumes Drivers online Topic, once a driver is online it will store the driver in `REDIS` and
+when a package to be delivered. it will notify all the drivers.
+
+When the driver comes online, it should also check the packages that needs to be delivered and if found, it should send
+notification by
+
+* finding a locker which is closer to the driver
+* checking packages in that warehouse to be delivered
+* comparing the destination of the driver and package
+* if the distance between is in configured range, then notify
+
+| Driver Destination Range Configuration | Distance     |
+|----------------------------------------|--------------|
+| DEFAULT                                | 2 km         |
+| ${TOWN_NAME}                           | ${NUMBER} km |
 
 ## Tracking Service
 
@@ -115,10 +172,11 @@ this will also return there statuses, if they are fully occupied or some are fre
 
 ### `/tracking`
 
-This service will keep status of the package, by consuming tracking topic and check the route of the package and send
-notifications to the customer
+This service will keep status of the package, by consuming tracking topic and checking the route entries of the package
 
-* it will create tracking number as soon as the order is paid and It will keep the package details
+finally sending notifications to the subscribed address
+
+* it will create tracking number as soon as the order is paid, and It will keep the package details
 * The tracking topic will be with messages form each publisher that will be used for notification and updating the
   processes
 * they will be steps for delivering a package, which means this service will try to track those steps
@@ -129,8 +187,8 @@ notifications to the customer
 | PACKAGE OUT TO                          |
 | PACKAGE ARRIVED TO WAREHOUSE at ADDRESS |
 | PACKAGE OUT FOR DELIVERY                |
-| PACKAGE  ARRIVED TO DESTINATION         |
-| PACKAGE PEACKED                         |
+| PACKAGE ARRIVED TO DESTINATION          |
+| PACKAGE PICKED                          |
 
 ## Users Service
 
@@ -152,10 +210,10 @@ This will be used to add, get default, set default
 
 ### `/payment/{package-uid}`
 
-This will get the payment response from external payment services and if it was successfull it will update the delivery
-to paid topic
+This will get the payment response from external payment services and if the paid amount equals to the price
+it will send the delivery to paid topic
 
-and if the delivery is canceled it will revert the payment from the external payment service, this needs futher
+and if the delivery is canceled it will revert the payment from the external payment service, this needs further
 investigation on payment services
 
 the transaction will be kept in mongo database
