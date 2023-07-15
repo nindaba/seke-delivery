@@ -194,15 +194,21 @@ finally sending notifications to the subscribed address
 
 <img src="./design/users-service.svg">
 
-### `/customers`
+### `/users`
 
-This service will store all the customer related details and preferences.
+This service will store all the users related details and preferences.
 
-### `/customer/{customer-uid}/addresses`
+for now we have two types of users, CUSTOMER and EMPLOYEE
+
+### `/users/employees`
+
+### `/users/custmers`
+
+### `/users/customers/{customer-uid}/addresses`
 
 Gets all the customer addresses and also add address for customer
 
-### `/customer/{customer-uid}/addresses/{code}/default`
+### `/users/customers/{customer-uid}/addresses/{code}/default`
 
 This will be used to get default, set default
 
