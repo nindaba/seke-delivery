@@ -181,6 +181,10 @@ finally sending notifications to the subscribed address
   processes
 * they will be steps for delivering a package, which means this service will try to track those steps
 
+### `/tracking/{tracking-number}`
+
+This will respond with a tracker
+
 | Tracking Messages                               |
 |-------------------------------------------------|
 | PACKAGE CREATED                                 |

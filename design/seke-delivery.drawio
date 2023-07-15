@@ -898,7 +898,7 @@
                         <mxRectangle x="2870" y="880" width="80" height="30" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="0HZkPYRlDkw0zgraulSe-2" value="+ uid&#10;+ firstname&#10;+ lastname&#10;+ groups" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="0HZkPYRlDkw0zgraulSe-1">
+                <mxCell id="0HZkPYRlDkw0zgraulSe-2" value="+ uid&#10;+ firstname&#10;+ lastname&#10;+ groups &lt;&lt;Group&gt;&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="0HZkPYRlDkw0zgraulSe-1">
                     <mxGeometry y="30" width="160" height="110" as="geometry"/>
                 </mxCell>
                 <mxCell id="0HZkPYRlDkw0zgraulSe-3" value="Employee" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;fillColor=#dae8fc;strokeColor=#6554C0;" vertex="1" parent="1">
@@ -914,7 +914,7 @@
                         <mxRectangle x="2870" y="880" width="80" height="30" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="0HZkPYRlDkw0zgraulSe-6" value="+ uid&#10;+ name&#10;+ members&#10;+ description" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="0HZkPYRlDkw0zgraulSe-5">
+                <mxCell id="0HZkPYRlDkw0zgraulSe-6" value="+ uid&#10;+ name&#10;+ members  &lt;&lt;Priciple&gt;&gt;&#10;+ description" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" vertex="1" parent="0HZkPYRlDkw0zgraulSe-5">
                     <mxGeometry y="30" width="160" height="70" as="geometry"/>
                 </mxCell>
                 <mxCell id="0HZkPYRlDkw0zgraulSe-14" style="edgeStyle=none;html=1;entryX=0;entryY=0;entryDx=0;entryDy=0;strokeColor=#6554C0;fontSize=16;fontColor=#BA3200;" edge="1" parent="1" source="0HZkPYRlDkw0zgraulSe-2" target="t7XQVS5YknsnGsmuFF8o-11">
