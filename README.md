@@ -181,14 +181,14 @@ finally sending notifications to the subscribed address
   processes
 * they will be steps for delivering a package, which means this service will try to track those steps
 
-| Tracking Messages                       |
-|-----------------------------------------|
-| PACKAGE CREATED                         |
-| PACKAGE OUT TO                          |
-| PACKAGE ARRIVED TO WAREHOUSE at ADDRESS |
-| PACKAGE OUT FOR DELIVERY                |
-| PACKAGE ARRIVED TO DESTINATION          |
-| PACKAGE PICKED                          |
+| Tracking Messages                               |
+|-------------------------------------------------|
+| PACKAGE CREATED                                 |
+| PACKAGE HEADING TO ${next-address}              |
+| PACKAGE ARRIVED TO WAREHOUSE at ${address}      |
+| PACKAGE ARRIVED TO LOCKER at ${address}         |
+| PACKAGE ARRIVED TO FINAL DESTINATION ${address} |
+| PACKAGE PICKED                                  |
 
 ## Users Service
 

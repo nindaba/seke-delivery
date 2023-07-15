@@ -975,7 +975,7 @@
                         <mxRectangle x="2870" y="880" width="80" height="30" as="alternateBounds"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="5vGH_rme4VFwhTsjqubh-8" value="+ uid&#10;+ message&#10;+ package uid&#10;+ location" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="5vGH_rme4VFwhTsjqubh-7" vertex="1">
+                <mxCell id="5vGH_rme4VFwhTsjqubh-8" value="+ tracking number&#10;+ message&#10;+ package uid&#10;+ location" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="5vGH_rme4VFwhTsjqubh-7" vertex="1">
                     <mxGeometry y="30" width="170" height="90" as="geometry"/>
                 </mxCell>
                 <mxCell id="1RsGt6QoLbCZlPfAzWMh-1" value="&lt;b&gt;Shared Domain&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;" vertex="1" parent="1">
