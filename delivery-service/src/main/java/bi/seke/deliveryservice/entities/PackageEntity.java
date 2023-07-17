@@ -13,7 +13,7 @@ public class PackageEntity {
     @PrimaryKey
     private PackagePK pk;
     @CassandraType(type = CassandraType.Name.TEXT)
-    private String routeID;
+    private UUID routeID;
     @CassandraType(type = CassandraType.Name.DOUBLE)
     private double weight;
     @CassandraType(type = CassandraType.Name.DOUBLE)
