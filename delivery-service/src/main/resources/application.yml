@@ -1,8 +1,19 @@
+server:
+  port: 8089
+
 spring:
+  profiles:
+    include: sampledata
+
   cassandra:
     schema-action: recreate
+    local-datacenter: datacenter1
+    keyspace-name: delivery_1_0
+
     connection:
       connect-timeout: 10s
       init-query-timeout: 10s
-    local-datacenter: datacenter1
-    keyspace-name: delivery_1_0
+    contact-points:
+      - localhost
+
+

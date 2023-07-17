@@ -1,0 +1,11 @@
+spring:
+  cassandra:
+    schema-action: recreate
+    connection:
+      connect-timeout: 10s
+      init-query-timeout: 10s
+    local-datacenter: datacenter1
+    keyspace-name: delivery_1_0
+    contact-points: cassandra-db:9042
+  profiles:
+    active: initialdata
