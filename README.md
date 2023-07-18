@@ -34,19 +34,19 @@ This service will create deliveries
 
 when delivery creation is not created in 10 min, the package shall be deleted from the service
 
-### `/deliveries/{delivery-id}`
+### `/deliveries/{package-uid}`
 
 A delivery will not be created in one request but multiple requests, as user start the process of creating the delivery,
 each key point will be patched to this endpoint and keep writing to the topics the changes
 
-* creates delivery and assing package uid, customerUid
+* creates delivery and passing package uid, customerUid
 * assign from address
 * assign to address
 * create route basic route
-* option warehouse or loker as destination
+* option warehouse or locker as destination
 * add weight and all other attributes
 
-as a user I should recieve an package uid of the create package
+as a user I should receive an package uid of the create package
 
 should give me the delivery and patch new changes to it
 

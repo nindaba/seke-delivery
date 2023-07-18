@@ -1,0 +1,54 @@
+uids:
+  - fae8357e-e40e-46e9-b9cc-8d1a07965aae
+  - 0ca00946-da02-4476-83b2-b8a2e4106a74
+  - 6a877aa9-44b5-444f-b554-09501c7a42ca
+init:
+  save: true
+  sample-package:
+    description: This is the package which will be used for implementing the service
+    pk:
+      uid: 8ca46aa1-8110-4c6a-9d8d-395ba387acf3
+      customer-uid: 8ca46aa1-8110-4c6a-9d8d-395ba387acf3
+    weight: .2
+    volume: .3
+    email: arthur@seke.bi
+    phone: 564 363 636
+    route-i-d: 8ca46aa1-8110-4c6a-9d8d-395ba387acf3
+    created-by: 8ca46aa1-8110-4c6a-9d8d-395ba387acf3
+    delivery-type: 8ca46aa1-8110-4c6a-9d8d-395ba387acf3
+
+  packages:
+    - description: This is the package which will be used for implementing the service
+      pk:
+        uid: 8ca46aa1-8110-4c6a-9d8d-395ba387acf3
+        customer-uid: 8ca46aa1-8110-4c6a-9d8d-395ba387acf3
+      weight: .2
+      volume: .3
+      email: arthur@seke.bi
+      phone: 564 363 636
+      route-i-d: 8ca46aa1-8110-4c6a-9d8d-395ba387acf3
+      created-by: 8ca46aa1-8110-4c6a-9d8d-395ba387acf3
+      delivery-type: fae8357e-e40e-46e9-b9cc-8d1a07965aae
+
+    - description: Package number 2
+      pk:
+        customer-uid: 4591624f-9b52-42b3-9afa-64d7cc64e075
+      route-iD: 4591624f-9b52-42b3-9afa-64d7cc64e075
+      weight: .2
+      volume: .3
+      email: arthur@seke.bi
+      phone: 564 363 636
+      route-i-d: 8ca46aa1-8110-4c6a-9d8d-395ba387acf3
+      created-by: 8ca46aa1-8110-4c6a-9d8d-395ba387acf3
+      delivery-type: fae8357e-e40e-46e9-b9cc-8d1a07965aae
+
+
+  delivery-types:
+    - value: FAST
+      active: true
+
+    - type-uid: fae8357e-e40e-46e9-b9cc-8d1a07965aae
+      value: BASIC
+      active: true
+
+

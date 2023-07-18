@@ -1,6 +1,6 @@
 rootProject.name = 'seke-delivery'
 
-include 'vehicle-service'
-include 'gateway'
+//include 'vehicle-service'
+//include 'gateway'
 include 'seke-data'
 include 'delivery-service'
