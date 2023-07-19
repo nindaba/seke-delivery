@@ -17,7 +17,7 @@ public class PackagePK implements Serializable {
     private UUID uid;
     @PrimaryKeyColumn(ordinal = 1, type = PrimaryKeyType.PARTITIONED)
     private UUID customerUid;
-    @PrimaryKeyColumn(ordinal = 3, type = PrimaryKeyType.CLUSTERED)
+    @PrimaryKeyColumn(ordinal = 4, type = PrimaryKeyType.CLUSTERED)
     private Date createdAt;
     @PrimaryKeyColumn(ordinal = 3, type = PrimaryKeyType.CLUSTERED)
     private Date modifiedAt;
