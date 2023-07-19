@@ -1,7 +1,6 @@
 package bi.seke.deliveryservice.entities;
 
 
-import com.datastax.oss.driver.api.core.uuid.Uuids;
 import lombok.Data;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyClass;
@@ -15,9 +14,11 @@ import java.util.UUID;
 @Data
 public class PackagePK implements Serializable {
     @PrimaryKeyColumn(ordinal = 0, type = PrimaryKeyType.PARTITIONED)
-    private UUID uid = Uuids.timeBased();
+    private UUID uid;
     @PrimaryKeyColumn(ordinal = 1, type = PrimaryKeyType.PARTITIONED)
     private UUID customerUid;
     @PrimaryKeyColumn(ordinal = 3, type = PrimaryKeyType.CLUSTERED)
-    private Date modifiedAt = new Date();
+    private Date createdAt;
+    @PrimaryKeyColumn(ordinal = 3, type = PrimaryKeyType.CLUSTERED)
+    private Date modifiedAt;
 }
