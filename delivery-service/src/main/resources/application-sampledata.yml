@@ -4,6 +4,8 @@ uids:
   - 6a877aa9-44b5-444f-b554-09501c7a42ca
 init:
   save: true
+  package-uid: OGNhNDZhYTEtODExMC00YzZhLTlkOGQtMzk1YmEzODdhY2YzXyA4Y2E0NmFhMS04MTEwLTRjNmEtOWQ4ZC0zOTViYTM4N2FjZjM=
+
   sample-package:
     description: This is the package which will be used for implementing the service
     pk:

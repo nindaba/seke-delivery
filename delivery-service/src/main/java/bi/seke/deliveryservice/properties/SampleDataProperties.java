@@ -18,9 +18,6 @@ import static java.util.List.of;
 @ConfigurationProperties(prefix = "init")
 @Data
 public class SampleDataProperties {
-    public boolean save;
-    public List<DeliveryTypeEntity> deliveryTypes;
-    public List<PackageEntity> packages;
     @NestedConfigurationProperty
     public PackageEntity samplePackage;
     /**
@@ -28,6 +25,10 @@ public class SampleDataProperties {
      */
     @Resource(name = "sampleDataSaveStrategy")
     protected SampleDataSaveStrategy sampleDataSaveStrategy;
+    private boolean save;
+    private String packageUid;
+    private List<DeliveryTypeEntity> deliveryTypes;
+    private List<PackageEntity> packages;
 
     @Bean
     public void saveConfigs() {
