@@ -21,12 +21,32 @@ public interface PackagePKService {
         return Base64.getEncoder().encodeToString(formatted.getBytes());
     }
 
-    default PackagePK decode(final String packageUid) {
-        final String decoded = new String(Base64.getDecoder().decode(packageUid));
-        final String[] s = StringUtils.split(decoded, DELIMITER);
+    default String encode(final String customerUid) {
+        Assert.notNull(customerUid, "Customer Uid can not be null");
 
-        Assert.isTrue(s.length == 2, "Invalid packageUid %s".formatted(packageUid));
-        return createPK(s);
+        final PackagePK pk = createPK(customerUid);
+        final String formatted = PACKAGE_UID_FORMAT.formatted(pk.getUid(), pk.getCustomerUid());
+        return Base64.getEncoder().encodeToString(formatted.getBytes());
+    }
+
+    /**
+     * Decode the package uid, if the decoding fails and the creation of the PK succeed we assume that<br>
+     * the package uid was passed was the customer uid of type {@link UUID}<br>
+     * maybe to be changed in the version 1.1
+     *
+     * @param packageUid
+     * @return packagePK
+     */
+    default PackagePK decode(final String packageUid) {
+        Assert.notNull(packageUid, "Package uid can not be null");
+
+        try {
+            final String decoded = new String(Base64.getDecoder().decode(packageUid));
+            final String[] s = StringUtils.split(decoded, DELIMITER);
+            return createPK(s);
+        } catch (Exception e) {
+            return createPK(packageUid);
+        }
     }
 
     default PackagePK createPK() {
@@ -37,15 +57,25 @@ public interface PackagePKService {
         return pk;
     }
 
+    default String createEncodedPK() {
+        return encode(createPK());
+    }
+
     default PackagePK createPK(final String uid, final String customerUid) {
-        final PackagePK pk = new PackagePK();
+        final PackagePK pk = createPK();
         pk.setCustomerUid(UUID.fromString(customerUid));
         pk.setUid(UUID.fromString(uid));
         return pk;
     }
 
+    default PackagePK createPK(final String customerUid) {
+        final PackagePK pk = createPK();
+        pk.setCustomerUid(UUID.fromString(customerUid));
+        return pk;
+    }
+
     private PackagePK createPK(final String... uids) {
-        final PackagePK pk = new PackagePK();
+        final PackagePK pk = createPK();
         final Iterator<String> iterator = Arrays.stream(uids).iterator();
         if (iterator.hasNext()) {
             pk.setUid(UUID.fromString(iterator.next()));

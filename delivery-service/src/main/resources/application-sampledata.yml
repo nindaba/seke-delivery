@@ -11,6 +11,8 @@ init:
     pk:
       uid: 8ca46aa1-8110-4c6a-9d8d-395ba387acf3
       customer-uid: 8ca46aa1-8110-4c6a-9d8d-395ba387acf3
+      created-at: ${current}
+      modified-at: ${current}
     weight: .2
     volume: .3
     email: arthur@seke.bi
@@ -24,6 +26,8 @@ init:
       pk:
         uid: 8ca46aa1-8110-4c6a-9d8d-395ba387acf3
         customer-uid: 8ca46aa1-8110-4c6a-9d8d-395ba387acf3
+        created-at: ${current}
+        modified-at: ${current}
       weight: .2
       volume: .3
       email: arthur@seke.bi
@@ -34,7 +38,10 @@ init:
 
     - description: Package number 2
       pk:
+        uid: 4591624f-9b52-42b3-9afa-64d7cc64e075
         customer-uid: 4591624f-9b52-42b3-9afa-64d7cc64e075
+        created-at: ${current}
+        modified-at: ${current}
       route-iD: 4591624f-9b52-42b3-9afa-64d7cc64e075
       weight: .2
       volume: .3
