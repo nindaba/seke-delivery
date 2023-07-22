@@ -202,6 +202,10 @@ This service will store all the users related details and preferences.
 
 for now we have two types of users, CUSTOMER and EMPLOYEE
 
+### `/users/{email-id or uuid}`
+
+This will get any user by email or uuid
+
 ### `/users/employees`
 
 ### `/users/custmers`
