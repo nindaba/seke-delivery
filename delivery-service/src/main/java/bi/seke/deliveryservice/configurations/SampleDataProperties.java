@@ -1,4 +1,4 @@
-package bi.seke.deliveryservice.properties;
+package bi.seke.deliveryservice.configurations;
 
 import bi.seke.deliveryservice.entities.DeliveryTypeEntity;
 import bi.seke.deliveryservice.entities.PackageEntity;

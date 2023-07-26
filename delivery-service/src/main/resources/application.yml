@@ -1,11 +1,8 @@
-server:
-  port: 8089
+server.port: 8089
 spring:
-  profiles:
-    include: sampledata
-  mvc:
-    servlet:
-      path: /deliveries
+  application.name: Delivery-Service
+  profiles.include: sampledata
+  mvc.servlet.path: /deliveries
 
   cassandra:
     schema-action: recreate
@@ -17,15 +14,18 @@ spring:
       init-query-timeout: 10s
     contact-points:
       - localhost
-  data:
-    redis:
-      host: localhost
-      port: 6379
+
+  data.redis:
+    host: localhost
+    port: 6379
   cache:
-    redis:
-      time-to-live: 360000
+    redis.time-to-live: 360000
     cache-names: Packages, DeliveryTypes
     type: redis
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    admin.auto-create: true
 
 config:
   date-format: dd-MM-yyyy
