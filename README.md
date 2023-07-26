@@ -46,7 +46,8 @@ each key point will be patched to this endpoint and keep writing to the topics t
 * option warehouse or locker as destination
 * add weight and all other attributes
 
-as a user I should receive an package uid of the create package
+as a user I should receive an package uid of the create package and `isReady` status
+`isReady` indicates if the package necessary fields are added and it can be paid a started for delivery
 
 should give me the delivery and patch new changes to it
 
@@ -223,6 +224,8 @@ This will be used to get default, set default
 <img src="./design/payment-service.svg">
 
 ### `/payment/{package-uid}`
+
+`POST` Will trigger the payment of the package
 
 This will get the payment response from external payment services and if the paid amount equals to the price
 it will send the delivery to paid topic
