@@ -1,10 +1,11 @@
-package bi.seke.deliveryservice.properties;
+package bi.seke.deliveryservice.configurations;
 
 import bi.seke.deliveryservice.dtos.PackageDTO;
 import bi.seke.deliveryservice.mappers.DTOMapper;
 import bi.seke.deliveryservice.mappers.impl.PackageEntryToDTOMapper;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
+import org.apache.kafka.common.config.TopicConfig;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +24,11 @@ public class Configurations {
     public static final String DELIMITER = ",";
     private String dateFormat = "dd-MM-YY";
     private SimpleDateFormat dateFormatter = new SimpleDateFormat(dateFormat);
+    private Integer numberOfKafkaBrokers = 1;
+    private String packageTopicName = "PackageTopic";
+    private String packageTopicCleanPolicy = "%s,%s".formatted(TopicConfig.CLEANUP_POLICY_COMPACT, TopicConfig.CLEANUP_POLICY_DELETE);
+    private String cancelTopicName = "CancelTopic";
+    private String cancelTopicCleanPolicy = "%s,%s".formatted(TopicConfig.CLEANUP_POLICY_COMPACT, TopicConfig.CLEANUP_POLICY_DELETE);
 
     @Bean
     public Map<Class, DTOMapper> dtoMappers(final PackageEntryToDTOMapper packageMapper) {
