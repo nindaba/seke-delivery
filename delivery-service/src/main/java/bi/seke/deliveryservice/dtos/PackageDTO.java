@@ -14,8 +14,7 @@ public class PackageDTO implements Serializable {
     @Id
     @Indexed
     private String packageUid;
-    @Indexed
-    private UUID routeID;
+    private RoutesDTO routes;
     private double weight;
     private double volume;
     private boolean fragile;
@@ -24,4 +23,6 @@ public class PackageDTO implements Serializable {
     private UUID deliveryType;
     private String description;
     private String createdB;
+    private String from;
+    private String to;
 }

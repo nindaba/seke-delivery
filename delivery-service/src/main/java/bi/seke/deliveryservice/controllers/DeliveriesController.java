@@ -54,7 +54,7 @@ public class DeliveriesController {
         if (packag.getPackageUid() != null) {
             final PackagePK pk = packagePKService.decode(packag.getPackageUid());
             packag.setPackageUid(packagePKService.encode(pk));
-            return packag;
+            return packageService.assemble(packag);
         }
 
         throw new PackageMissingUid();

@@ -20,12 +20,31 @@ spring:
     port: 6379
   cache:
     redis.time-to-live: 360000
-    cache-names: Packages, DeliveryTypes
+    cache-names: ${config.package-cache-name},${config.delivery-types-cache-name}
     type: redis
 
   kafka:
     bootstrap-servers: localhost:9092
     admin.auto-create: true
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      bootstrap-servers: ${spring.kafka.bootstrap-servers}
+      properties:
+        spring.json.trusted.packages: bi.seke.deliveryservice.dtos
+    consumer:
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      bootstrap-servers: ${spring.kafka.bootstrap-servers}
+      group-id: ${spring.application.name}
+      properties:
+        spring.json.trusted.packages: bi.seke.deliveryservice.dtos
 
 config:
   date-format: dd-MM-yyyy
+  paid-topic-name: PaidTopic
+  route-topic-name: RouteTopic
+  package-topic-name: PackageTopic
+  cancel-topic-name: CancelTopic
+  cancel-topic-clean-policy: compact,delete
+  package-topic-clean-policy: compact,delete
+  package-cache-name: Packages
+  delivery-types-cache-name: DeliveryTypes
