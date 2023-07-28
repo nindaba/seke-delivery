@@ -1,5 +1,6 @@
 package bi.seke.deliveryservice.services;
 
+import bi.seke.deliveryservice.dtos.PackageDTO;
 import bi.seke.deliveryservice.entities.PackageEntity;
 import bi.seke.deliveryservice.entities.PackagePK;
 
@@ -49,4 +50,14 @@ public interface PackageService {
      * @param pk
      */
     void deleteByPk(PackagePK pk);
+
+    /**
+     * This will assemble the package to be delivered,
+     * add the package to the necessary topics </br>
+     * and updates the cache
+     *
+     * @param packag
+     * @return
+     */
+    PackageDTO assemble(PackageDTO packag);
 }
