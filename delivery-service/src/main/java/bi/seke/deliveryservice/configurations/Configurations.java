@@ -8,8 +8,11 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.validation.Validator;
 
 import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 @Configuration
@@ -52,5 +55,10 @@ public class Configurations {
                 PackageDTO.class, packageMapper
         );
         return mappers;
+    }
+
+    @Bean
+    public Collection<Validator> packageValidators(final Validator packageValidator) {
+        return List.of(packageValidator);
     }
 }

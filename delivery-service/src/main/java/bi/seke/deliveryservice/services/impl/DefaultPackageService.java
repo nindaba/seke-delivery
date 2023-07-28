@@ -7,17 +7,18 @@ import bi.seke.deliveryservice.entities.PackagePK;
 import bi.seke.deliveryservice.exceptions.WritingException;
 import bi.seke.deliveryservice.repositories.PackageRepository;
 import bi.seke.deliveryservice.services.PackageService;
+import bi.seke.deliveryservice.validators.GlobalValidator;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.BoundValueOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.Validator;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -33,6 +34,7 @@ public class DefaultPackageService implements PackageService {
     protected final RedisTemplate<String, PackageDTO> redisTemplate;
     protected final KafkaTemplate<String, PackageDTO> kafkaTemplate;
     protected final Configurations configurations;
+    protected final Collection<Validator> packageValidators;
 
     @Override
     public List<PackageEntity> getPackagesByCustomerUid(final String customerUid) {
@@ -75,35 +77,56 @@ public class DefaultPackageService implements PackageService {
         final BoundValueOperations<String, PackageDTO> valueOps = redisTemplate.boundValueOps(key);
 
         return Optional.ofNullable(valueOps.get())
-                .map(packag -> {
-                    BeanUtils.copyProperties(source, packag);
-                    return packag;
-                })
+                .map(target -> mergePackage(source, target))
                 .or(() -> Optional.of(source))
-                .filter(this::validatedPackage)
+                .filter(packag -> GlobalValidator.validate(packag, packageValidators))
                 .map(this::sendToPackageTopic)
                 .orElse(source);
     }
 
-    private PackageDTO sendToPackageTopic(final PackageDTO target) {
+    private PackageDTO mergePackage(final PackageDTO source, final PackageDTO target) {
+        Optional.ofNullable(source.getRoutes())
+                .ifPresent(target::setRoutes);
+
+        Optional.ofNullable(source.getWeight())
+                .ifPresent(target::setWeight);
+
+        Optional.ofNullable(source.getVolume())
+                .ifPresent(target::setVolume);
+
+        Optional.ofNullable(source.getFragile())
+                .ifPresent(target::setFragile);
+
+        Optional.ofNullable(source.getEmail())
+                .ifPresent(target::setEmail);
+
+        Optional.ofNullable(source.getPhone())
+                .ifPresent(target::setPhone);
+
+        Optional.ofNullable(source.getDeliveryType())
+                .ifPresent(target::setDeliveryType);
+
+        Optional.ofNullable(source.getDescription())
+                .ifPresent(target::setDescription);
+
+        Optional.ofNullable(source.getCreatedB())
+                .ifPresent(target::setCreatedB);
+
+        Optional.ofNullable(source.getFrom())
+                .ifPresent(target::setFrom);
+
+        Optional.ofNullable(source.getTo())
+                .ifPresent(target::setTo);
+
+        return target;
+    }
+
+    protected PackageDTO sendToPackageTopic(final PackageDTO target) {
         final CompletableFuture<SendResult<String, PackageDTO>> send = kafkaTemplate.send(
                 configurations.getPackageTopicName(), target.getPackageUid(), target);
 
         send.whenComplete(this::logKafkaResults);
         return target;
-    }
-
-    private Boolean validatedPackage(final PackageDTO packageDTO) {
-        return Optional.of(packageDTO)
-                .filter(packag -> StringUtils.isNotBlank(packag.getPackageUid()))
-                .filter(packag -> validateWeight(packag)
-                        || StringUtils.isNotBlank(packag.getFrom() + packag.getTo()))
-                .isPresent();
-    }
-
-    private boolean validateWeight(final PackageDTO packag) {
-        return packag.getWeight() >= configurations.getPackageMinWeight()
-                && packag.getWeight() <= configurations.getPackageMaxWeight();
     }
 
     protected void logKafkaResults(final SendResult<String, PackageDTO> results, final Throwable throwable) {
