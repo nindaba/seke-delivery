@@ -1,4 +1,4 @@
-package bi.seke.data.dtos;
+package bi.seke.schema.deliveryservice;
 
 import java.io.Serializable;
 

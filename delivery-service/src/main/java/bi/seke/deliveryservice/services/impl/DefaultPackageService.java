@@ -1,6 +1,5 @@
 package bi.seke.deliveryservice.services.impl;
 
-import bi.seke.data.dtos.PackageDTO;
 import bi.seke.deliveryservice.configurations.Configurations;
 import bi.seke.deliveryservice.entities.PackageEntity;
 import bi.seke.deliveryservice.entities.PackagePK;
@@ -8,6 +7,7 @@ import bi.seke.deliveryservice.exceptions.WritingException;
 import bi.seke.deliveryservice.repositories.PackageRepository;
 import bi.seke.deliveryservice.services.PackageService;
 import bi.seke.deliveryservice.validators.GlobalValidator;
+import bi.seke.schema.deliveryservice.PackageDTO;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.redis.core.BoundValueOperations;

@@ -1,5 +1,5 @@
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-cassandra'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation project(path: ':seke-data')
+    implementation project(path: ':seke-schema')
 }

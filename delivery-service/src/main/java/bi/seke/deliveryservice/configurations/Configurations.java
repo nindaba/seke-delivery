@@ -1,8 +1,8 @@
 package bi.seke.deliveryservice.configurations;
 
-import bi.seke.data.dtos.PackageDTO;
 import bi.seke.deliveryservice.mappers.DTOMapper;
 import bi.seke.deliveryservice.mappers.impl.PackageEntryToDTOMapper;
+import bi.seke.schema.deliveryservice.PackageDTO;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.context.properties.ConfigurationProperties;
