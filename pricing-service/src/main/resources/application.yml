@@ -39,4 +39,6 @@ spring:
 config:
   price-cache-name: Pricing
   pricing-topic-name: PricingTopic
+  package-topic-name: PackageTopic
+  route-topic-name: RouteTopic
   pricing-topic-clean-policy: compact,delete
