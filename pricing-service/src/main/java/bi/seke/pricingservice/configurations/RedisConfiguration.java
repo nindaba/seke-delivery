@@ -1,4 +1,4 @@
-package bi.seke.deliveryservice.configurations;
+package bi.seke.pricingservice.configurations;
 
 import bi.seke.data.dtos.PackageDTO;
 import org.springframework.cache.interceptor.KeyGenerator;
@@ -7,16 +7,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import static bi.seke.deliveryservice.configurations.Configurations.COMMA_DELIMITER;
+import static bi.seke.pricingservice.configurations.Configurations.COMMA_DELIMITER;
+
 
 @Configuration
 public class RedisConfiguration {
     @Bean
-    public RedisTemplate<String, PackageDTO> packageRedisTemplate(final RedisConnectionFactory factory) {
-        final RedisTemplate<String, PackageDTO> template = new RedisTemplate<>();
+    public RedisTemplate<String, ? extends Serializable> packageRedisTemplate(final RedisConnectionFactory factory) {
+        final RedisTemplate<String, ? extends Serializable> template = new RedisTemplate<>();
         template.setConnectionFactory(factory);
         return template;
     }

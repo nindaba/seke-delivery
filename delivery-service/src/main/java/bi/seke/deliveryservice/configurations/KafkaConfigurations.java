@@ -1,6 +1,6 @@
 package bi.seke.deliveryservice.configurations;
 
-import bi.seke.deliveryservice.dtos.PackageDTO;
+import bi.seke.data.dtos.PackageDTO;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.common.config.TopicConfig;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;

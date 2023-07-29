@@ -1,6 +1,6 @@
 package bi.seke.deliveryservice.consumers;
 
-import bi.seke.deliveryservice.dtos.RoutesDTO;
+import bi.seke.data.dtos.RoutesDTO;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.KafkaListener;

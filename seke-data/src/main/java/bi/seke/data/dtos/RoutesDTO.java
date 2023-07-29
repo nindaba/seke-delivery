@@ -1,4 +1,4 @@
-package bi.seke.deliveryservice.dtos;
+package bi.seke.data.dtos;
 
 import lombok.Data;
 

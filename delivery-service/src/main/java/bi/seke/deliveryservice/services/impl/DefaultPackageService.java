@@ -1,7 +1,7 @@
 package bi.seke.deliveryservice.services.impl;
 
+import bi.seke.data.dtos.PackageDTO;
 import bi.seke.deliveryservice.configurations.Configurations;
-import bi.seke.deliveryservice.dtos.PackageDTO;
 import bi.seke.deliveryservice.entities.PackageEntity;
 import bi.seke.deliveryservice.entities.PackagePK;
 import bi.seke.deliveryservice.exceptions.WritingException;

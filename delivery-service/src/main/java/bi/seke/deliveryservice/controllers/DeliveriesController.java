@@ -1,6 +1,6 @@
 package bi.seke.deliveryservice.controllers;
 
-import bi.seke.deliveryservice.dtos.PackageDTO;
+import bi.seke.data.dtos.PackageDTO;
 import bi.seke.deliveryservice.entities.PackageEntity;
 import bi.seke.deliveryservice.entities.PackagePK;
 import bi.seke.deliveryservice.exceptions.MappingException;
