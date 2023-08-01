@@ -5,30 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfc128a1-f6a2-4a29-8fbc-c9131467f0cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pricing-service/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/hybrisProjectSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/hybrisProjectSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buildSrc/src/main/groovy/bi.seke.commons.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/buildSrc/src/main/groovy/bi.seke.commons.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delivery-service/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/delivery-service/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delivery-service/src/main/java/bi/seke/deliveryservice/configurations/Configurations.java" beforeDir="false" afterPath="$PROJECT_DIR$/delivery-service/src/main/java/bi/seke/deliveryservice/configurations/Configurations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delivery-service/src/main/java/bi/seke/deliveryservice/configurations/KafkaConfigurations.java" beforeDir="false" afterPath="$PROJECT_DIR$/delivery-service/src/main/java/bi/seke/deliveryservice/configurations/KafkaConfigurations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delivery-service/src/main/java/bi/seke/deliveryservice/configurations/RedisConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/delivery-service/src/main/java/bi/seke/deliveryservice/configurations/RedisConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delivery-service/src/main/java/bi/seke/deliveryservice/consumers/RoutingTopicConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/delivery-service/src/main/java/bi/seke/deliveryservice/consumers/RoutingTopicConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delivery-service/src/main/java/bi/seke/deliveryservice/controllers/DeliveriesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/delivery-service/src/main/java/bi/seke/deliveryservice/controllers/DeliveriesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delivery-service/src/main/java/bi/seke/deliveryservice/mappers/impl/PackageEntryToDTOMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/delivery-service/src/main/java/bi/seke/deliveryservice/mappers/impl/PackageEntryToDTOMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delivery-service/src/main/java/bi/seke/deliveryservice/services/PackageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/delivery-service/src/main/java/bi/seke/deliveryservice/services/PackageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delivery-service/src/main/java/bi/seke/deliveryservice/services/impl/DefaultPackageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/delivery-service/src/main/java/bi/seke/deliveryservice/services/impl/DefaultPackageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delivery-service/src/main/java/bi/seke/deliveryservice/validators/DefaultPackageValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/delivery-service/src/main/java/bi/seke/deliveryservice/validators/DefaultPackageValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delivery-service/src/test/java/bi/seke/deliveryservice/services/impl/DefaultPackageServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/delivery-service/src/test/java/bi/seke/deliveryservice/services/impl/DefaultPackageServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delivery-service/src/test/java/bi/seke/deliveryservice/validators/DefaultPackageValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/delivery-service/src/test/java/bi/seke/deliveryservice/validators/DefaultPackageValidatorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pricing-service/src/main/java/bi/seke/pricingservice/configurations/RedisConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/pricing-service/src/main/java/bi/seke/pricingservice/configurations/RedisConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seke-data/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seke-data/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/seke-schema/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seke-data/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/seke-schema/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seke-data/src/main/java/bi/seke/data/dtos/PackageDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/seke-schema/src/main/java/bi/seke/schema/deliveryservice/PackageDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seke-data/src/main/java/bi/seke/data/dtos/RouteEntryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/seke-schema/src/main/java/bi/seke/schema/deliveryservice/RouteEntryDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seke-data/src/main/java/bi/seke/data/dtos/RoutesDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/seke-schema/src/main/java/bi/seke/schema/deliveryservice/RoutesDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +45,17 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="seke-delivery" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="seke-delivery" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="seke-delivery" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
@@ -122,35 +111,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "28",
-    "jdk.selected.JAVA_MODULE": "17",
-    "last_directory_selection": "/Users/nindaba/Documents/self/ms/seke-delivery/seke-data/src/main/java",
-    "last_opened_file_path": "/Users/nindaba/Documents/self/ms/seke-delivery/pricing-service",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "spring.configuration.checksum": "0cad27670a35903c37cfedc5fe9003fa",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;28&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_directory_selection&quot;: &quot;/Users/nindaba/Documents/self/ms/seke-delivery/seke-data/src/main/java&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/nindaba/Documents/self/ms/seke-delivery/pricing-service&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;0cad27670a35903c37cfedc5fe9003fa&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="bi.seke.vehicleservice.entities" />
@@ -166,7 +155,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.PricingServiceApplication">
+  <component name="RunManager" selected="Gradle.seke-delivery [clean]">
     <configuration name="seke-delivery [:buildSrc:build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -211,7 +200,7 @@
       <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="seke-delivery [bootBuildImage]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="seke-delivery [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -222,7 +211,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="bootBuildImage" />
+            <option value="clean" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -321,11 +310,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.seke-delivery [clean]" />
         <item itemvalue="Gradle.seke-delivery [:buildSrc:build]" />
         <item itemvalue="Gradle.seke-delivery [:buildSrc:clean]" />
         <item itemvalue="Gradle.seke-delivery [dependencies]" />
         <item itemvalue="Gradle.seke-delivery:seke-data [build]" />
-        <item itemvalue="Gradle.seke-delivery [bootBuildImage]" />
       </list>
     </recent_temporary>
   </component>
