@@ -97,6 +97,21 @@
             <ModuleSettings />
           </value>
         </entry>
+        <entry key="seke-delivery.buildSrc">
+          <value>
+            <ModuleSettings />
+          </value>
+        </entry>
+        <entry key="seke-delivery.buildSrc.main">
+          <value>
+            <ModuleSettings />
+          </value>
+        </entry>
+        <entry key="seke-delivery.delivery-service">
+          <value>
+            <ModuleSettings />
+          </value>
+        </entry>
         <entry key="seke-delivery.gateway">
           <value>
             <ModuleSettings />
