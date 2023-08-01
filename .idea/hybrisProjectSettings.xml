@@ -97,6 +97,16 @@
             <ModuleSettings />
           </value>
         </entry>
+        <entry key="seke-delivery.delivery-service">
+          <value>
+            <ModuleSettings />
+          </value>
+        </entry>
+        <entry key="seke-delivery.delivery-service.main">
+          <value>
+            <ModuleSettings />
+          </value>
+        </entry>
         <entry key="seke-delivery.gateway">
           <value>
             <ModuleSettings />
@@ -107,12 +117,27 @@
             <ModuleSettings />
           </value>
         </entry>
+        <entry key="seke-delivery.pricing-service">
+          <value>
+            <ModuleSettings />
+          </value>
+        </entry>
         <entry key="seke-delivery.seke-data">
           <value>
             <ModuleSettings />
           </value>
         </entry>
         <entry key="seke-delivery.seke-data.main">
+          <value>
+            <ModuleSettings />
+          </value>
+        </entry>
+        <entry key="seke-delivery.seke-schema">
+          <value>
+            <ModuleSettings />
+          </value>
+        </entry>
+        <entry key="seke-delivery.seke-schema.main">
           <value>
             <ModuleSettings />
           </value>
