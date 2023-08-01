@@ -1,4 +1,4 @@
-package bi.seke.deliveryservice.dtos;
+package bi.seke.schema.deliveryservice;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

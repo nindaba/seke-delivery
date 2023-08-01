@@ -1,7 +1,7 @@
 package bi.seke.deliveryservice.validators;
 
 import bi.seke.deliveryservice.configurations.Configurations;
-import bi.seke.deliveryservice.dtos.PackageDTO;
+import bi.seke.schema.deliveryservice.PackageDTO;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;

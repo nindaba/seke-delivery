@@ -24,8 +24,12 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: prod
 
+  pricing-service:
+    image: seke.bi/pricing-service:1.0
+    container_name: pricing-service
+    ports:
+      - 8089:8091
 
-  # Delivery Service
   delivery-cassandra-test:
     image: cassandra:latest
     container_name: delivery-cassandra-test

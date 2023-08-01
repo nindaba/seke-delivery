@@ -1,6 +1,5 @@
 package bi.seke.deliveryservice.controllers;
 
-import bi.seke.deliveryservice.dtos.PackageDTO;
 import bi.seke.deliveryservice.entities.PackageEntity;
 import bi.seke.deliveryservice.entities.PackagePK;
 import bi.seke.deliveryservice.exceptions.MappingException;
@@ -8,6 +7,7 @@ import bi.seke.deliveryservice.exceptions.PackageMissingUid;
 import bi.seke.deliveryservice.mappers.strategies.MapperStrategy;
 import bi.seke.deliveryservice.services.PackagePKService;
 import bi.seke.deliveryservice.services.PackageService;
+import bi.seke.schema.deliveryservice.PackageDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;

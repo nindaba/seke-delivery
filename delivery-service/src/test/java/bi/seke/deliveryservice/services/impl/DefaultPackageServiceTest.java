@@ -1,8 +1,8 @@
 package bi.seke.deliveryservice.services.impl;
 
 import bi.seke.deliveryservice.configurations.Configurations;
-import bi.seke.deliveryservice.dtos.PackageDTO;
 import bi.seke.deliveryservice.repositories.PackageRepository;
+import bi.seke.schema.deliveryservice.PackageDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;

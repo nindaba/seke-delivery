@@ -1,8 +1,8 @@
 package bi.seke.deliveryservice.configurations;
 
-import bi.seke.deliveryservice.dtos.PackageDTO;
 import bi.seke.deliveryservice.mappers.DTOMapper;
 import bi.seke.deliveryservice.mappers.impl.PackageEntryToDTOMapper;
+import bi.seke.schema.deliveryservice.PackageDTO;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -23,7 +23,6 @@ public class Configurations {
     public static final String PAID_TOPIC_NAME = "${config.paid-topic-name}";
     public static final String ROUTE_TOPIC_NAME = "${config.route-topic-name}";
     public static final String PACKAGE_TOPIC_NAME = "${config.package-topic-name}";
-    public static final String CANCEL_TOPIC_NAME = "${config.cancel-topic-name}";
     public static final String COMMA_DELIMITER = ",";
     public static final String CACHE_KEY_FORMATTER = "%s::%s";
 
