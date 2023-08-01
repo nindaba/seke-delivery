@@ -1,7 +1,7 @@
 package bi.seke.deliveryservice.validators;
 
+import bi.seke.data.dtos.PackageDTO;
 import bi.seke.deliveryservice.configurations.Configurations;
-import bi.seke.deliveryservice.dtos.PackageDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;

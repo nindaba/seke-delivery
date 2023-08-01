@@ -1,6 +1,6 @@
 package bi.seke.deliveryservice.configurations;
 
-import bi.seke.deliveryservice.dtos.PackageDTO;
+import bi.seke.data.dtos.PackageDTO;
 import bi.seke.deliveryservice.mappers.DTOMapper;
 import bi.seke.deliveryservice.mappers.impl.PackageEntryToDTOMapper;
 import lombok.Data;

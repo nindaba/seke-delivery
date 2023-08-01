@@ -1,6 +1,6 @@
 package bi.seke.deliveryservice.mappers.impl;
 
-import bi.seke.deliveryservice.dtos.PackageDTO;
+import bi.seke.data.dtos.PackageDTO;
 import bi.seke.deliveryservice.entities.PackageEntity;
 import bi.seke.deliveryservice.mappers.DTOMapper;
 import bi.seke.deliveryservice.services.PackagePKService;
