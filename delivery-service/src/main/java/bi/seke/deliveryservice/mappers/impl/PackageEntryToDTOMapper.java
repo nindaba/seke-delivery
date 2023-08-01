@@ -1,9 +1,9 @@
 package bi.seke.deliveryservice.mappers.impl;
 
-import bi.seke.data.dtos.PackageDTO;
 import bi.seke.deliveryservice.entities.PackageEntity;
 import bi.seke.deliveryservice.mappers.DTOMapper;
 import bi.seke.deliveryservice.services.PackagePKService;
+import bi.seke.schema.deliveryservice.PackageDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

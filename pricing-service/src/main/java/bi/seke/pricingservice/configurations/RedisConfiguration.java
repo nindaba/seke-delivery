@@ -1,6 +1,6 @@
 package bi.seke.pricingservice.configurations;
 
-import bi.seke.data.dtos.PackageDTO;
+import bi.seke.schema.deliveryservice.PackageDTO;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
