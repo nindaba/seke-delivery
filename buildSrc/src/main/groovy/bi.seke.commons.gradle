@@ -32,3 +32,7 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+bootBuildImage {
+    imageName = "seke.bi/${project.name}:${project.version}"
+}

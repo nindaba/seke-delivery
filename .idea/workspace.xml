@@ -5,8 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dfc128a1-f6a2-4a29-8fbc-c9131467f0cb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/pricing-service/src/main/java/bi/seke/pricingservice/configurations/PriceConfigurationProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pricing-service/src/main/java/bi/seke/pricingservice/controllers/PriceConfigurationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pricing-service/src/main/java/bi/seke/pricingservice/entities/PriceConfigurationEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pricing-service/src/main/java/bi/seke/pricingservice/repositories/PriceConfigurationRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pricing-service/src/main/java/bi/seke/pricingservice/services/PriceConfigurationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pricing-service/src/main/java/bi/seke/pricingservice/services/impl/DefaultPriceConfigurationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pricing-service/src/main/java/bi/seke/pricingservice/strategies/PriceCalculationStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pricing-service/src/main/java/bi/seke/pricingservice/strategies/impl/DefaultPriceCalculationStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pricing-service/src/main/resources/application-price-config.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/seke-schema/src/main/java/bi/seke/schema/pricingservice/PriceDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/delivery-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/delivery-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/design/pricing-service.svg" beforeDir="false" afterPath="$PROJECT_DIR$/design/pricing-service.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/design/seke-delivery.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/design/seke-delivery.drawio" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pricing-service/src/main/java/bi/seke/pricingservice/PricingServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/pricing-service/src/main/java/bi/seke/pricingservice/PricingServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pricing-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/pricing-service/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +53,9 @@
         <task path="$PROJECT_DIR$/delivery-service">
           <activation />
         </task>
+        <task path="$PROJECT_DIR$/pricing-service">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
@@ -49,31 +66,20 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="seke-delivery" type="f1a62948:ProjectNode" />
+                <item name="pricing-service" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="seke-delivery" type="f1a62948:ProjectNode" />
+                <item name="pricing-service" type="2d1252cf:ModuleNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="seke-delivery" type="f1a62948:ProjectNode" />
+                <item name="pricing-service" type="2d1252cf:ModuleNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="seke-delivery" type="f1a62948:ProjectNode" />
-                <item name="pricing-service" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="seke-delivery" type="f1a62948:ProjectNode" />
-                <item name="pricing-service" type="2d1252cf:ModuleNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="seke-delivery" type="f1a62948:ProjectNode" />
-                <item name="pricing-service" type="2d1252cf:ModuleNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
-                <item name="compileClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
               </path>
             </expand>
             <select />
@@ -122,7 +128,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;28&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;44&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
     &quot;last_directory_selection&quot;: &quot;/Users/nindaba/Documents/self/ms/seke-delivery/seke-data/src/main/java&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/nindaba/Documents/self/ms/seke-delivery/pricing-service&quot;,
@@ -136,12 +142,16 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;0cad27670a35903c37cfedc5fe9003fa&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;ee296cfcf9e047c3dcf4b3c95d036bca&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="bi.seke.schema.pricingservice" />
       <recent name="bi.seke.vehicleservice.entities" />
       <recent name="bi.seke.vehicleservice.facades" />
       <recent name="bi.seke.vehicleservice.controllers.data" />
@@ -155,51 +165,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.seke-delivery [clean]">
-    <configuration name="seke-delivery [:buildSrc:build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":buildSrc:build" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>false</ForceTestExec>
-      <method v="2" />
-    </configuration>
-    <configuration name="seke-delivery [:buildSrc:clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":buildSrc:clean" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>false</ForceTestExec>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Spring Boot.PricingServiceApplication">
     <configuration name="seke-delivery [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -222,32 +188,10 @@
       <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="seke-delivery [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="seke-delivery:pricing-service [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="dependencies" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>false</ForceTestExec>
-      <method v="2" />
-    </configuration>
-    <configuration name="seke-delivery:seke-data [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/seke-data" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/pricing-service" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" />
         <option name="taskDescriptions">
@@ -308,13 +252,52 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.yml.delivery-cassandra-test: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="delivery-cassandra-test" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.delivery-redis-test: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="delivery-redis-test" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.pl-kafka-broker: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="pl-kafka-broker" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yml.pl-kafka-broker: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.delivery-redis-test: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.delivery-cassandra-test: Compose Deployment" />
+        <item itemvalue="Gradle.seke-delivery:pricing-service [build]" />
         <item itemvalue="Gradle.seke-delivery [clean]" />
-        <item itemvalue="Gradle.seke-delivery [:buildSrc:build]" />
-        <item itemvalue="Gradle.seke-delivery [:buildSrc:clean]" />
-        <item itemvalue="Gradle.seke-delivery [dependencies]" />
-        <item itemvalue="Gradle.seke-delivery:seke-data [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -341,6 +324,9 @@
       <workItem from="1688586970599" duration="1443000" />
       <workItem from="1688672365016" duration="1369000" />
       <workItem from="1690913598580" duration="595000" />
+      <workItem from="1690955527196" duration="1271000" />
+      <workItem from="1690997064999" duration="8504000" />
+      <workItem from="1691126339319" duration="3034000" />
     </task>
     <servers />
   </component>
@@ -349,6 +335,17 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/pricing-service/src/main/java/bi/seke/pricingservice/controllers/PriceConfigurationController.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

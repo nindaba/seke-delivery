@@ -1,11 +1,15 @@
 package bi.seke.pricingservice.configurations;
 
+import bi.seke.pricingservice.strategies.PriceCalculationStrategy;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 @ConfigurationProperties(prefix = "config")
@@ -31,4 +35,17 @@ public class Configurations {
     //REDIS
     private String priceCacheName;
     private String deliveryTypesCacheName;
+
+    @Bean
+    protected List<PriceCalculationStrategy> priceCalculationStrategies(
+            final PriceCalculationStrategy weightPriceCalculationStrategy,
+            final PriceCalculationStrategy volumePriceCalculationStrategy) {
+
+        final List<PriceCalculationStrategy> strategies = new ArrayList<>();
+
+        strategies.add(weightPriceCalculationStrategy);
+        strategies.add(volumePriceCalculationStrategy);
+
+        return strategies;
+    }
 }
