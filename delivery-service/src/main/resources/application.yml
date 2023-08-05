@@ -35,7 +35,7 @@ spring:
       bootstrap-servers: ${spring.kafka.bootstrap-servers}
       group-id: ${spring.application.name}
       properties:
-        spring.json.trusted.packages: bi.seke.schema
+        spring.json.trusted.packages: bi.seke.schema.*
 
 config:
   date-format: dd-MM-yyyy

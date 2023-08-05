@@ -1,9 +1,6 @@
 package bi.seke.pricingservice.services;
 
-import bi.seke.pricingservice.configurations.Configurations;
 import bi.seke.pricingservice.entities.PriceConfigurationEntity;
-import bi.seke.schema.deliveryservice.PackageDTO;
-import bi.seke.schema.pricingservice.PriceDTO;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -55,13 +52,4 @@ public interface PriceConfigurationService {
      * @param configs a collection of price configurations
      */
     void savePriceConfiguration(Collection<PriceConfigurationEntity> configs);
-
-    /**
-     * Creates PriceDTO and <br>
-     * Runs all the {@link Configurations#priceCalculationStrategies} and combines their results to {@link PriceDTO#amount}
-     *
-     * @param packag
-     * @return
-     */
-    PriceDTO calculatePackagePrice(PackageDTO packag);
 }
