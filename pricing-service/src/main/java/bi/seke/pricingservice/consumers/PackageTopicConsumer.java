@@ -1,6 +1,6 @@
 package bi.seke.pricingservice.consumers;
 
-import bi.seke.pricingservice.services.PriceConfigurationService;
+import bi.seke.pricingservice.services.PriceService;
 import bi.seke.schema.deliveryservice.PackageDTO;
 import bi.seke.schema.pricingservice.PriceDTO;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ import static bi.seke.pricingservice.configurations.Configurations.PACKAGE_TOPIC
 @AllArgsConstructor
 @Log4j2
 public class PackageTopicConsumer {
-    protected PriceConfigurationService service;
+    protected PriceService service;
 
     @KafkaListener(topics = PACKAGE_TOPIC_NAME)
     public void consumer(final PackageDTO packag) {
