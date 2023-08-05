@@ -20,6 +20,7 @@ public class Configurations {
     public static final String PACKAGE_TOPIC_NAME = "${config.package-topic-name}";
     public static final String COMMA_DELIMITER = ",";
     public static final String CACHE_KEY_FORMATTER = "%s::%s";
+    public static final String PRICING_CONFIGS_CACHE = "PricingConfigs";
 
 
     private String dateFormat = "dd-MM-YY";
@@ -33,8 +34,7 @@ public class Configurations {
     private String pricingTopicCleanPolicy;
 
     //REDIS
-    private String priceCacheName;
-    private String deliveryTypesCacheName;
+    private String pricingConfigsCacheName;
 
     @Bean
     protected List<PriceCalculationStrategy> priceCalculationStrategies(
@@ -47,5 +47,10 @@ public class Configurations {
         strategies.add(volumePriceCalculationStrategy);
 
         return strategies;
+    }
+
+    @Bean
+    protected String pricingConfigsCache() {
+        return "PricingConfigurations";
     }
 }

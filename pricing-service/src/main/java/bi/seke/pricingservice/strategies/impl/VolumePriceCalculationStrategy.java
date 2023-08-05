@@ -28,7 +28,7 @@ public class VolumePriceCalculationStrategy implements PriceCalculationStrategy 
 
 
         if (volume != null) {
-            repository.findAllByTarget(TARGET_VOLUME).stream()
+            repository.findAllByActiveTrueAndTarget(TARGET_VOLUME).stream()
                     .filter(config -> config.getMin() <= volume && config.getMax() >= volume)
                     .findFirst()
                     .ifPresent(applyConfiguration(packag, price));
@@ -39,7 +39,7 @@ public class VolumePriceCalculationStrategy implements PriceCalculationStrategy 
         return config -> {
             log.info("Applying Price configuration {} to package {}", config.getName(), packag.getPackageUid());
 
-            price.getTargetsAmounts()
+            price.getDetailedAmount()
                     .compute(TARGET_VOLUME, (key, value) -> {
                         log.info("Replacing the old {} price {} with {} for package {}",
                                 TARGET_VOLUME, value, config.getAmount(), packag.getPackageUid());

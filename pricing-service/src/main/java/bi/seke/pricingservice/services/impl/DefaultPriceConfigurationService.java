@@ -6,8 +6,10 @@ import bi.seke.pricingservice.services.PriceConfigurationService;
 import bi.seke.pricingservice.strategies.PriceCalculationStrategy;
 import bi.seke.schema.deliveryservice.PackageDTO;
 import bi.seke.schema.pricingservice.PriceDTO;
+import com.datastax.oss.driver.api.core.uuid.Uuids;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Collection;
 import java.util.List;
@@ -37,7 +39,11 @@ public class DefaultPriceConfigurationService implements PriceConfigurationServi
 
     @Override
     public void deletePriceConfigurations(final Collection<String> uids) {
-        repository.deleteAllById(uids.stream().map(UUID::fromString).toList());
+        if (CollectionUtils.isEmpty(uids)) {
+            repository.deleteAll();
+        } else {
+            repository.deleteAllById(uids.stream().map(UUID::fromString).toList());
+        }
     }
 
     @Override
@@ -53,13 +59,15 @@ public class DefaultPriceConfigurationService implements PriceConfigurationServi
     @Override
     public PriceDTO calculatePackagePrice(PackageDTO packag) {
         final PriceDTO price = new PriceDTO();
+        price.setPackageUid(packag.getPackageUid());
+        price.setUid(Uuids.timeBased());
 
         priceCalculationStrategies.forEach(strategy -> strategy.calculate(packag, price));
 
-        price.getTargetsAmounts().values()
+        price.getDetailedAmount().values()
                 .stream().reduce(Double::sum)
                 .ifPresent(price::setAmount);
-        
+
         return price;
     }
 }

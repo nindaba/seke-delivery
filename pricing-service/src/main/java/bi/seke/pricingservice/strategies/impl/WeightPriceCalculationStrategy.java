@@ -29,7 +29,7 @@ public class WeightPriceCalculationStrategy implements PriceCalculationStrategy 
 
 
         if (weight != null) {
-            repository.findAllByTarget(TARGET_WEIGHT).stream()
+            repository.findAllByActiveTrueAndTarget(TARGET_WEIGHT).stream()
                     .filter(config -> config.getMin() <= weight && config.getMax() >= weight)
                     .findFirst()
                     .ifPresent(applyConfiguration(packag, price));
@@ -39,8 +39,8 @@ public class WeightPriceCalculationStrategy implements PriceCalculationStrategy 
     protected Consumer<PriceConfigurationEntity> applyConfiguration(PackageDTO packag, PriceDTO price) {
         return config -> {
             log.info("Applying Price configuration {} to package {}", config.getName(), packag.getPackageUid());
-            
-            price.getTargetsAmounts()
+
+            price.getDetailedAmount()
                     .compute(TARGET_WEIGHT, (key, value) -> {
                         log.info("Replacing the old {} price {} with {} for package {}",
                                 TARGET_WEIGHT, value, config.getAmount(), packag.getPackageUid());

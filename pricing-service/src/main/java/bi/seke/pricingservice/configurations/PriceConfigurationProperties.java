@@ -26,10 +26,12 @@ public class PriceConfigurationProperties {
     @Bean
     public CommandLineRunner runner(final PriceConfigurationService service) {
         return args -> {
-            log.info("Saving the price configurations from application properties ....");
-            service.savePriceConfiguration(sampleConfig);
-            service.savePriceConfiguration(configs);
-            log.info("Done Saving the price configurations from application properties ✅");
+            if (saveProperties) {
+                log.info("Saving the price configurations from application properties ....");
+                service.savePriceConfiguration(sampleConfig);
+                service.savePriceConfiguration(configs);
+                log.info("Done Saving the price configurations from application properties ✅");
+            }
         };
     }
 }
