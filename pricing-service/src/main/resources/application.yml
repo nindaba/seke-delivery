@@ -24,7 +24,7 @@ spring:
 
   kafka:
     bootstrap-servers: localhost:9092
-    admin.auto-create: false
+    admin.auto-create: true
     producer:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       bootstrap-servers: ${spring.kafka.bootstrap-servers}
