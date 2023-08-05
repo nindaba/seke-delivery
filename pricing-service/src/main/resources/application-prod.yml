@@ -1,3 +1,7 @@
-server.port: 8080
-#spring.cassandra:
-#  schema-action: create_if_not_exists
+spring:
+  cassandra:
+    schema-action: create_if_not_exists
+  kafka:
+    bootstrap-servers: pl-kafka-broker-0:9092
+    admin.auto-create: true
+  data.redis.host: delivery-redis-test

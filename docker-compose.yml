@@ -1,3 +1,7 @@
+#networks:
+#  delivery-network:
+#    name: delivery-network
+#    external: true
 services:
   #  vehicle-test-db:
   #    image: mysql:latest
@@ -14,7 +18,6 @@ services:
   #    environment:
   #      MYSQL_ROOT_PASSWORD: mysql:1.0
   #      MYSQL_DATABASE: vehicles
-
   delivery-service:
     image: seke.bi/delivery-service:1.0
     container_name: delivery-service
@@ -26,6 +29,9 @@ services:
       - 8090:8080
     environment:
       SPRING_PROFILES_ACTIVE: prod
+      SPRING_CASSANDRA_CONTACT-POINTS: delivery-cassandra-test:9042
+      SPRING_KAFKA_BOOTSTRAP-SERVERS: pl-kafka-broker-0:9092
+      SPRING_DATA_REDIS_HOST: delivery-redis-test
 
   pricing-service:
     image: seke.bi/pricing-service:1.0
@@ -38,6 +44,9 @@ services:
       - pl-kafka-broker-0
     environment:
       SPRING_PROFILES_ACTIVE: prod
+      SPRING_CASSANDRA_CONTACT-POINTS: delivery-cassandra-test:9042
+      SPRING_KAFKA_BOOTSTRAP-SERVERS: pl-kafka-broker-0:9092
+      SPRING_DATA_REDIS_HOST: delivery-redis-test
 
   delivery-cassandra-test:
     image: cassandra:latest
@@ -59,12 +68,3 @@ services:
       - 9092:9092
     environment:
       - ALLOW_PLAINTEXT_LISTENER=yes
-
-  pl-kafka-broker-1:
-    image: bitnami/kafka:latest
-    container_name: pl-kafka-broker-1
-    ports:
-      - 9093:9092
-    environment:
-      - ALLOW_PLAINTEXT_LISTENER=yes
-

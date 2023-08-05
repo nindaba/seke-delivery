@@ -1,4 +1,3 @@
-server.port: 8090
 spring:
   application.name: Pricing-Service
   mvc.servlet.path: /pricing
@@ -25,7 +24,7 @@ spring:
 
   kafka:
     bootstrap-servers: localhost:9092
-    admin.auto-create: true
+    admin.auto-create: false
     producer:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       bootstrap-servers: ${spring.kafka.bootstrap-servers}
@@ -39,7 +38,7 @@ spring:
         spring.json.trusted.packages: bi.seke.schema
 
 config:
-  price-cache-name: Pricing
+  pricing-configs-cache-name: PricingConfigurations
   pricing-topic-name: PricingTopic
   package-topic-name: PackageTopic
   route-topic-name: RouteTopic
