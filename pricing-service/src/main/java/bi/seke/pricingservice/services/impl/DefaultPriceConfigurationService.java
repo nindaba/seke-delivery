@@ -8,6 +8,7 @@ import bi.seke.schema.deliveryservice.PackageDTO;
 import bi.seke.schema.pricingservice.PriceDTO;
 import com.datastax.oss.driver.api.core.uuid.Uuids;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -15,6 +16,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import static bi.seke.pricingservice.configurations.Configurations.PRICES_CACHE;
 
 @Service
 @AllArgsConstructor
@@ -57,6 +60,7 @@ public class DefaultPriceConfigurationService implements PriceConfigurationServi
     }
 
     @Override
+    @CachePut(key = "#packag.packageUid", value = PRICES_CACHE)
     public PriceDTO calculatePackagePrice(PackageDTO packag) {
         final PriceDTO price = new PriceDTO();
         price.setPackageUid(packag.getPackageUid());

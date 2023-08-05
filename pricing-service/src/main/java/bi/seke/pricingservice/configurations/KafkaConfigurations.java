@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Configuration
 public class KafkaConfigurations {
     @Bean
-    public NewTopic priceTopic(final Configurations configs) {
+    protected NewTopic priceTopic(final Configurations configs) {
         return TopicBuilder.name(configs.getPricingTopicName())
                 .partitions(configs.getNumberOfKafkaBrokers())
                 .config(TopicConfig.CLEANUP_POLICY_CONFIG, configs.getPricingTopicCleanPolicy())
@@ -22,7 +22,7 @@ public class KafkaConfigurations {
     }
 
     @Bean
-    public KafkaTemplate<String, ? extends Serializable> packageTemplate(final KafkaProperties properties) {
+    protected KafkaTemplate<String, ? extends Serializable> packageTemplate(final KafkaProperties properties) {
         final DefaultKafkaProducerFactory<String, ? extends Serializable> factory = new DefaultKafkaProducerFactory<>(properties.buildProducerProperties());
         return new KafkaTemplate<>(factory);
     }
