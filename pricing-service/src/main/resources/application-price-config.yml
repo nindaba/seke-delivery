@@ -1,0 +1,66 @@
+prices:
+  save-properties: true
+  sample-config:
+    target: weight
+    amount: 1.3
+    min: 0.1
+    max: 5
+    unit: kg
+    name: WEIGHT-V1-CONFIG
+    description: Weight price configuration version one
+    active: true
+
+  configs:
+    - target: weight
+      active: true
+      amount: 19.99
+      name: StandardPrice
+      min: 10.0
+      max: 100.0
+      unit: kg
+      description: Standard price for ProductA
+
+    - target: weight
+      active: true
+      amount: 9.99
+      name: StandardPrice
+      min: 0.1
+      max: 10
+      unit: kg
+      description: Standard price for ProductA
+
+    - target: fragile
+      active: false
+      amount: 29.99
+      name: PromoPrice
+      min: 20.0
+      max: 50.0
+      unit: boolean
+      description: Promotional price for ProductB
+
+    - target: route
+      active: true
+      amount: 15.49
+      name: SpecialPrice
+      min: 5.0
+      max: 30.0
+      unit: Route
+      description: Special price for ProductC
+
+    - target: volume
+      active: true
+      amount: 9.99
+      name: SalePrice
+      min: 7.0
+      max: 20.0
+      unit: cm3
+      description: Sale price for ProductD
+
+    - target: volume
+      active: true
+      amount: 24.95
+      name: MembershipPrice
+      min: 20.0
+      max: 50.0
+      unit: cm3
+      description: Membership price for ProductE

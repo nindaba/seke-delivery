@@ -1,4 +1,3 @@
-server.port: 8089
 spring:
   application.name: Delivery-Service
   profiles.include: sampledata
@@ -30,13 +29,13 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       bootstrap-servers: ${spring.kafka.bootstrap-servers}
       properties:
-        spring.json.trusted.packages: bi.seke.deliveryservice.dtos
+        spring.json.trusted.packages: bi.seke.schema
     consumer:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       bootstrap-servers: ${spring.kafka.bootstrap-servers}
       group-id: ${spring.application.name}
       properties:
-        spring.json.trusted.packages: bi.seke.deliveryservice.dtos
+        spring.json.trusted.packages: bi.seke.schema
 
 config:
   date-format: dd-MM-yyyy

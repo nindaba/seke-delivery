@@ -1,34 +1,52 @@
+#networks:
+#  delivery-network:
+#    name: delivery-network
+#    external: true
 services:
-  vehicle-test-db:
-    image: mysql:latest
-    container_name: vehicle-test-db
-    ports:
-      - 3307:3306
-    environment:
-      MYSQL_ROOT_PASSWORD: mysql:test
-      MYSQL_DATABASE: vehicles
-
-  vehicle-db:
-    image: mysql:latest
-    container_name: vehicle-db
-    environment:
-      MYSQL_ROOT_PASSWORD: mysql:1.0
-      MYSQL_DATABASE: vehicles
-
-  vehicle-service:
-    image: seke.bi/vehicle-service:1.0
+  #  vehicle-test-db:
+  #    image: mysql:latest
+  #    container_name: vehicle-test-db
+  #    ports:
+  #      - 3307:3306
+  #    environment:
+  #      MYSQL_ROOT_PASSWORD: mysql:test
+  #      MYSQL_DATABASE: vehicles
+  #
+  #  vehicle-db:
+  #    image: mysql:latest
+  #    container_name: vehicle-db
+  #    environment:
+  #      MYSQL_ROOT_PASSWORD: mysql:1.0
+  #      MYSQL_DATABASE: vehicles
+  delivery-service:
+    image: seke.bi/delivery-service:1.0
+    container_name: delivery-service
     links:
-      - vehicle-db
+      - delivery-cassandra-test
+      - delivery-redis-test
+      - pl-kafka-broker-0
     ports:
-      - '8080:8080'
+      - 8090:8080
     environment:
       SPRING_PROFILES_ACTIVE: prod
+      SPRING_CASSANDRA_CONTACT-POINTS: delivery-cassandra-test:9042
+      SPRING_KAFKA_BOOTSTRAP-SERVERS: pl-kafka-broker-0:9092
+      SPRING_DATA_REDIS_HOST: delivery-redis-test
 
   pricing-service:
     image: seke.bi/pricing-service:1.0
     container_name: pricing-service
     ports:
-      - 8089:8091
+      - 8091:8080
+    links:
+      - delivery-cassandra-test
+      - delivery-redis-test
+      - pl-kafka-broker-0
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_CASSANDRA_CONTACT-POINTS: delivery-cassandra-test:9042
+      SPRING_KAFKA_BOOTSTRAP-SERVERS: pl-kafka-broker-0:9092
+      SPRING_DATA_REDIS_HOST: delivery-redis-test
 
   delivery-cassandra-test:
     image: cassandra:latest
@@ -43,11 +61,10 @@ services:
       - 6379:6379
       - 8001:8001
 
-  pl-kafka-broker:
+  pl-kafka-broker-0:
     image: bitnami/kafka:latest
-    container_name: pl-kafka-broker
+    container_name: pl-kafka-broker-0
     ports:
       - 9092:9092
     environment:
       - ALLOW_PLAINTEXT_LISTENER=yes
-
