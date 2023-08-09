@@ -1,4 +1,4 @@
 rootProject.name = 'seke-delivery'
 
 //include 'vehicle-service'
-include 'seke-schema', 'delivery-service', 'pricing-service'
+include 'seke-schema', 'delivery-service', 'pricing-service', 'user-service'
