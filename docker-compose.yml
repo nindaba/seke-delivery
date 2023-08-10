@@ -29,9 +29,6 @@ services:
       - 8090:8080
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      SPRING_CASSANDRA_CONTACT-POINTS: delivery-cassandra-test:9042
-      SPRING_KAFKA_BOOTSTRAP-SERVERS: pl-kafka-broker-0:9092
-      SPRING_DATA_REDIS_HOST: delivery-redis-test
 
   pricing-service:
     image: seke.bi/pricing-service:1.0
@@ -44,9 +41,17 @@ services:
       - pl-kafka-broker-0
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      SPRING_CASSANDRA_CONTACT-POINTS: delivery-cassandra-test:9042
-      SPRING_KAFKA_BOOTSTRAP-SERVERS: pl-kafka-broker-0:9092
-      SPRING_DATA_REDIS_HOST: delivery-redis-test
+
+  payment-service:
+    image: seke.bi/payment-service:1.0
+    container_name: payment-service
+    links:
+      - mongo-test
+    ports:
+      - 8092:8080
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+
 
   delivery-cassandra-test:
     image: cassandra:latest
@@ -68,3 +73,9 @@ services:
       - 9092:9092
     environment:
       - ALLOW_PLAINTEXT_LISTENER=yes
+
+  mongo-test:
+    image: mongo:latest
+    container_name: mongo-test
+    ports:
+      - 27017:27017
