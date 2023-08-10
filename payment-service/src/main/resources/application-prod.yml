@@ -1,0 +1,5 @@
+spring:
+  data.mongodb.host: mongo-test
+  kafka:
+    bootstrap-servers: pl-kafka-broker-0:9092
+    admin.auto-create: true
