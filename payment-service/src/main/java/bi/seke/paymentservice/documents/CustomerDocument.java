@@ -4,15 +4,13 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serializable;
 import java.util.UUID;
 
-@Data
 @Document
-public class PriceDocument implements Serializable {
+@Data
+public class CustomerDocument {
     @Id
-    private UUID uid;
-    private String packageUid;
-    private Double amount;
-    private boolean paid;
+    private UUID uuid;
+    private String customerUid;
+    private Double balance;
 }

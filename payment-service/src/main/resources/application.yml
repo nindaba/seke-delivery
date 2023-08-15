@@ -1,6 +1,9 @@
 spring:
   application.name: Payment-service
   mvc.servlet.path: /payment
+  task:
+    scheduling:
+      pool.size: 1
 
   data:
     mongodb:
@@ -28,3 +31,13 @@ config:
   paid-topic-name: PaidTopic
   cancel-topic-name: CancelTopic
   paid-topic-clean-policy: compact,delete
+  price-mismatch-retries: 3
+  price-mismatch-retry-delay: 3
+  price-mismatch-return: false
+  payment-confirmation-statuses:
+    0: ACCEPTED
+    -1: PAYED_LESS
+    1: OVERCHARGED
+  accepted-confirmation-statuses:
+    - ACCEPTED
+    - OVERCHARGED
