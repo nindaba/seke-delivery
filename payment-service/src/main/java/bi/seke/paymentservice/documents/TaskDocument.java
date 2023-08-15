@@ -7,12 +7,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
 import java.util.UUID;
 
-@Data
 @Document
-public class PriceDocument implements Serializable {
+@Data
+public class TaskDocument implements Serializable {
     @Id
-    private UUID uid;
+    private UUID id;
     private String packageUid;
-    private Double amount;
-    private boolean paid;
+    private Integer retries;
+    private boolean maxRetriesReached;
 }
