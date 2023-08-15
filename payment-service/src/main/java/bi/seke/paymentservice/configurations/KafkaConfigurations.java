@@ -25,4 +25,12 @@ public class KafkaConfigurations {
         final DefaultKafkaProducerFactory<String, PackageDTO> factory = new DefaultKafkaProducerFactory<>(properties.buildProducerProperties());
         return new KafkaTemplate<>(factory);
     }
+
+    @Bean
+    public NewTopic routeTopic(final Configurations configs) {
+        return TopicBuilder.name(configs.getPaidTopicName())
+                .partitions(configs.getNumberOfKafkaBrokers())
+                .config(TopicConfig.CLEANUP_POLICY_CONFIG, configs.getPaidTopicCleanPolicy())
+                .build();
+    }
 }
