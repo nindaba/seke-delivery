@@ -19,7 +19,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-@Service("taskService")
+
+@Service("confirmationRetryStrategy")
 @AllArgsConstructor
 @Log4j2
 public class DefaultConfirmationRetryStrategy implements ConfirmationRetryStrategy {
