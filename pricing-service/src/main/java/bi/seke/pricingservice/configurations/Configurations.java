@@ -21,7 +21,7 @@ public class Configurations {
     public static final String COMMA_DELIMITER = ",";
     public static final String CACHE_KEY_FORMATTER = "%s::%s";
     public static final String PRICING_CONFIGS_CACHE = "PricingConfigs";
-
+    public static final String PRICES_CACHE = "Prices";
 
     private String dateFormat = "dd-MM-YY";
     private SimpleDateFormat dateFormatter = new SimpleDateFormat(dateFormat);
