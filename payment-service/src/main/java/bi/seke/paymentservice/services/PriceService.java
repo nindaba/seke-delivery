@@ -1,18 +1,10 @@
 package bi.seke.paymentservice.services;
 
-import bi.seke.schema.paymentservice.PaymentDTO;
 import bi.seke.schema.pricingservice.PriceDTO;
 
 import java.util.Optional;
 
 public interface PriceService {
-    /**
-     * Confirms and write the confirmation to paid topic
-     *
-     * @param payment payment transaction
-     */
-    void confirmPayment(PaymentDTO payment);
-
     /**
      * Finds a price with package uid and check if it is marked as paid
      *
@@ -35,4 +27,11 @@ public interface PriceService {
      * @param packageUid package uid
      */
     void markPaid(String packageUid);
+
+    /**
+     * Resets {@link #markPaid(String)}
+     *
+     * @param packageUid
+     */
+    void reset(String packageUid);
 }

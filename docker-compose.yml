@@ -29,6 +29,8 @@ services:
       - 8090:8080
     environment:
       SPRING_PROFILES_ACTIVE: prod
+    volumes:
+      - services
 
   pricing-service:
     image: seke.bi/pricing-service:1.0
@@ -41,24 +43,28 @@ services:
       - pl-kafka-broker-0
     environment:
       SPRING_PROFILES_ACTIVE: prod
-
+    volumes:
+      - services
   payment-service:
     image: seke.bi/payment-service:1.0
     container_name: payment-service
     links:
       - mongo-test
+      - pl-kafka-broker-0
     ports:
       - 8092:8080
     environment:
       SPRING_PROFILES_ACTIVE: prod
-
+    volumes:
+      - services
 
   delivery-cassandra-test:
     image: cassandra:latest
     container_name: delivery-cassandra-test
     ports:
       - 9042:9042
-
+    volumes:
+      - service_data
   delivery-redis-test:
     image: redis/redis-stack:latest
     container_name: delivery-redis-test
@@ -79,3 +85,41 @@ services:
     container_name: mongo-test
     ports:
       - 27017:27017
+
+  mongo-kafka-connect:
+    container_name: mongo-kafka-connect
+    build:
+      context: .
+      dockerfile: connect.Dockerfile
+    ports:
+      - 8083:8083
+    links:
+      - mongo-test
+      - pl-kafka-broker-0
+    environment:
+      CONNECT_BOOTSTRAP_SERVERS: pl-kafka-broker-0:9092
+      CONNECT_REST_ADVERTISED_HOST_NAME: connect
+      CONNECT_REST_PORT: 8083
+      CONNECT_GROUP_ID: connect-cluster-group
+      CONNECT_CONFIG_STORAGE_TOPIC: docker-connect-configs
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_OFFSET_FLUSH_INTERVAL_MS: 10000
+      CONNECT_OFFSET_STORAGE_TOPIC: docker-connect-offsets
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_STATUS_STORAGE_TOPIC: docker-connect-status
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_PLUGIN_PATH: "/usr/share/java,/usr/share/confluent-hub-components"
+      CONNECT_CONNECTIONS_MAX_IDLE_MS: 180000
+      CONNECT_METADATA_MAX_AGE_MS: 180000
+      CONNECT_AUTO_CREATE_TOPICS_ENABLE: "true"
+      CONNECT_KEY_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+      CONNECT_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
+
+  database-initializer-cassandra:
+    container_name: database-initializer-cassandra
+    image: nuvo/docker-cqlsh:latest
+    links:
+      - delivery-cassandra-test
+    environment:
+      - CQLSH_HOST=localhost
+      - CQLSH_PORT=9042

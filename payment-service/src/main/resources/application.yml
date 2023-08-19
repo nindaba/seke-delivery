@@ -1,3 +1,5 @@
+logging.level:
+  bi.: DEBUG
 spring:
   application.name: Payment-service
   mvc.servlet.path: /payment
@@ -7,10 +9,9 @@ spring:
 
   data:
     mongodb:
-      database: payment-1_0
+      database: payment_1_0
       host: localhost
       port: 27017
-
   kafka:
     bootstrap-servers: localhost:9092
     admin.auto-create: true
@@ -31,8 +32,8 @@ config:
   paid-topic-name: PaidTopic
   cancel-topic-name: CancelTopic
   paid-topic-clean-policy: compact,delete
-  price-mismatch-retries: 3
-  price-mismatch-retry-delay: 3
+  price-mismatch-retries: 1
+  price-mismatch-retry-delay: 1
   price-mismatch-return: false
   payment-confirmation-statuses:
     0: ACCEPTED
