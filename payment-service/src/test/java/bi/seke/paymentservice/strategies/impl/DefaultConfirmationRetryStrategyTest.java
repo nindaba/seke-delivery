@@ -7,6 +7,8 @@ import bi.seke.paymentservice.repositories.CustomerRepository;
 import bi.seke.paymentservice.repositories.TaskRepository;
 import bi.seke.paymentservice.services.PackageUidService;
 import bi.seke.paymentservice.services.PriceService;
+import bi.seke.paymentservice.strategies.ConfirmationStrategy;
+import bi.seke.schema.paymentservice.ConfirmationDTO;
 import bi.seke.schema.paymentservice.PaymentDTO;
 import bi.seke.schema.pricingservice.PriceDTO;
 import org.junit.jupiter.api.BeforeAll;
@@ -40,6 +42,8 @@ class DefaultConfirmationRetryStrategyTest {
     @Spy
     PriceService priceService;
     @Spy
+    ConfirmationStrategy confirmationStrategy;
+    @Spy
     TaskScheduler taskScheduler;
     @Spy
     Configurations configurations;
@@ -68,10 +72,8 @@ class DefaultConfirmationRetryStrategyTest {
         when(taskRepository.findByPackageUid(PAYMENT.getPackageUid())).thenReturn(Optional.of(TASK));
         strategy.createRetryConfirmation(PAYMENT);
 
-        verify(configurations).getPriceMismatchRetries();
         verify(configurations).getPriceMismatchRetryDelay();
-        verify(taskRepository).save(TASK);
-        verify(strategy).getStartTime(1);
+        verify(strategy).getStartTime(0);
         verify(taskScheduler).schedule(any(Runnable.class), any(Instant.class));
     }
 
@@ -95,22 +97,24 @@ class DefaultConfirmationRetryStrategyTest {
 
     @Test
     void retryConfirmation() {
-        TASK.setRetries(1);
+        int RETRIES = 1;
+        TASK.setRetries(RETRIES);
         int FIRST_RETRY_ONLY = 1;
         when(priceService.getPrice(PAYMENT.getPackageUid())).thenReturn(Optional.ofNullable(PRICE));
         when(taskRepository.findByPackageUid(PAYMENT.getPackageUid())).thenReturn(Optional.ofNullable(TASK));
         when(configurations.getPriceMismatchRetries()).thenReturn(3);
         when(customerRepository.save(any())).thenReturn(CUSTOMER);
-        doNothing().when(priceService).confirmPayment(PAYMENT);
-        strategy.retryConfirmation(PAYMENT);
-        verify(priceService, times(FIRST_RETRY_ONLY)).confirmPayment(PAYMENT);
+        when(confirmationStrategy.createAndSendConfirmation(PAYMENT)).thenReturn(new ConfirmationDTO());
+        strategy.retryConfirmation(PAYMENT, TASK);
+        verify(confirmationStrategy, times(FIRST_RETRY_ONLY)).createAndSendConfirmation(PAYMENT);
 
         PRICE.setAmount(PAYMENT.getAmount());
-        strategy.retryConfirmation(PAYMENT);
-        verify(priceService, times(FIRST_RETRY_ONLY)).confirmPayment(PAYMENT);
+        strategy.retryConfirmation(PAYMENT, TASK);
+        verify(confirmationStrategy, times(FIRST_RETRY_ONLY)).createAndSendConfirmation(PAYMENT);
 
-        TASK.setRetries(3);
-        strategy.retryConfirmation(PAYMENT);
+        RETRIES = 3;
+        TASK.setRetries(RETRIES);
+        strategy.retryConfirmation(PAYMENT, TASK);
         verify(TASK).setMaxRetriesReached(true);
 
     }

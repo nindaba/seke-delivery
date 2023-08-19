@@ -22,8 +22,8 @@ public class KafkaConfigurations {
     }
 
     @Bean
-    protected KafkaTemplate<String, ? extends Serializable> packageTemplate(final KafkaProperties properties) {
-        final DefaultKafkaProducerFactory<String, ? extends Serializable> factory = new DefaultKafkaProducerFactory<>(properties.buildProducerProperties());
+    public KafkaTemplate<String, Serializable> packageTemplate(final KafkaProperties properties) {
+        final DefaultKafkaProducerFactory<String, Serializable> factory = new DefaultKafkaProducerFactory<>(properties.buildProducerProperties());
         return new KafkaTemplate<>(factory);
     }
 }
