@@ -49,7 +49,12 @@ public class DefaultConfirmationRetryStrategy implements ConfirmationRetryStrate
     public void createRetryConfirmation(final PaymentDTO payment) {
         log.debug("Creating Task for retrying the payment confirmation for {}", payment::getPackageUid);
 
-        taskRepository.findByPackageUid(payment.getPackageUid()).or(getTaskDocumentCreator(payment)).filter(task -> !task.isMaxRetriesReached()).ifPresent(task -> psTaskScheduler.schedule(() -> retryConfirmation(payment, task), getStartTime(task.getRetries())));
+        taskRepository.findByPackageUid(payment.getPackageUid())
+                .or(getTaskDocumentCreator(payment))
+                .filter(task -> !task.isMaxRetriesReached())
+                .ifPresent(task -> psTaskScheduler.schedule(
+                        () -> retryConfirmation(payment, task), getStartTime(task.getRetries())
+                ));
     }
 
     /**
