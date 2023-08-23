@@ -193,6 +193,14 @@ This will respond with a tracker
 | PACKAGE ARRIVED TO FINAL DESTINATION ${address} |
 | PACKAGE PICKED                                  |
 
+### Source
+
+these are services "publishers", which will be attached to the package status, and each source has priority in case the
+package statuses are sent in the same ${time window default 30 s}, in case of connection issues, they might be out of
+sync which is why we need to correct the order of the statuses
+
+this sources will be configured in application properties
+
 ## Users Service
 
 <img src="./design/users-service.svg">
