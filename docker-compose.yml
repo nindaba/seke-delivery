@@ -54,6 +54,15 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: prod
 
+  user-service:
+    image: seke.bi/user-service:1.0
+    container_name: payment-service
+    links:
+      - mongo-test
+    ports:
+      - 8092:8080
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
 
   delivery-cassandra-test:
     image: cassandra:latest

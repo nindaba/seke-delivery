@@ -9,6 +9,7 @@
 * [Lockers Service](https://github.com/nindaba/seke-delivery#lockers-service)
 * [Users Service](https://github.com/nindaba/seke-delivery#users-service)
 * [Payment Service](https://github.com/nindaba/seke-delivery#payment-service)
+* [Tracking Service](https://github.com/nindaba/seke-delivery#tracking-service)
 * [Drivers Service](https://github.com/nindaba/seke-delivery#drivers-service)
 
 ## Seke Gateway
@@ -171,27 +172,51 @@ notification by
 
 ### `/tracking`
 
-This service will keep status of the package, by consuming tracking topic and checking the route entries of the package
+This service will keep status of the package, by consuming paid, canceled, and tracking topic and checking the route
+entries of the package
 
-finally sending notifications to the subscribed address
+finally sending notifications to the subscribed emails and phone numbers
 
-* it will create tracking number as soon as the order is paid, and It will keep the package details
+* it will create tracking number as soon as the order is paid,
+* create all the possible statuses according to the number of routes on the package
+* and It will keep the package details and status into cassandra
 * The tracking topic will be with messages form each publisher that will be used for notification and updating the
   processes
 * they will be steps for delivering a package, which means this service will try to track those steps
+* warehouse, tracking and other services should send statuses to tracking topic, once the package state is changed
+
+#### 1. Creating tracker form Paid Topic
+
+* create a tracking number
+* copy all the necessary details to the tracking, such as the following
+  > packageUid<br>
+  > fetch the customer emails and phone numbers<br>
+  > estimate the delivery date from the type [EXPRESS =2.5h,FAST =5h,NORMAL=24h,BASIC=48h]<br>
+* saves them to cassandra and at the same time to the publisher
+
+#### 2. Creating all possible statuses from routes
+
+* First create 'CREATED' status, and assign date created to it
+* Create 'HEADING & ARRIVED TO ${address}' according to the routes and lastly 'ARRIVED TO FINAL DESTINATION ${name &
+  address}'
+* create 'PICKED' and assign estimated delivery date to it
+
+#### 3. Tracking Topic
+
+* will send all the necessary information of the `Status` to the tracking topic, but must also contain a complete source
 
 ### `/tracking/{tracking-number}`
 
 This will respond with a tracker
 
-| Tracking Messages                               |
-|-------------------------------------------------|
-| PACKAGE CREATED                                 |
-| PACKAGE HEADING TO ${next-address}              |
-| PACKAGE ARRIVED TO WAREHOUSE at ${address}      |
-| PACKAGE ARRIVED TO LOCKER at ${address}         |
-| PACKAGE ARRIVED TO FINAL DESTINATION ${address} |
-| PACKAGE PICKED                                  |
+| Tracking Messages                                      |
+|--------------------------------------------------------|
+| PACKAGE CREATED                                        |
+| PACKAGE HEADING TO ${name & address}                   |
+| PACKAGE ARRIVED TO WAREHOUSE at ${name & address}      |
+| PACKAGE ARRIVED TO LOCKER at ${name & address}         |
+| PACKAGE ARRIVED TO FINAL DESTINATION ${name & address} |
+| PACKAGE PICKED                                         |
 
 ### Source
 
