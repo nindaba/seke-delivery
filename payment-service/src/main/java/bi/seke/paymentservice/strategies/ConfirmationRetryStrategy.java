@@ -11,4 +11,12 @@ public interface ConfirmationRetryStrategy {
      * @param payment the payment transaction
      */
     void createRetryConfirmation(PaymentDTO payment);
+
+    /**
+     * If there is a task related to the {@link PaymentDTO#packageUid}, it resets the number of reties to 0<br>
+     * and starts {@link #createRetryConfirmation(PaymentDTO)}
+     *
+     * @param payment
+     */
+    void startConfirmationRetryTasks(PaymentDTO payment);
 }

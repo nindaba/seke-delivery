@@ -1,6 +1,8 @@
 spring:
   cassandra:
     schema-action: create_if_not_exists
+    contact-points: delivery-cassandra-test
+
   kafka:
     bootstrap-servers: pl-kafka-broker-0:9092
     admin.auto-create: true

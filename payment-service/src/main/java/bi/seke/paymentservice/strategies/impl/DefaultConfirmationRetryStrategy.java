@@ -8,6 +8,8 @@ import bi.seke.paymentservice.repositories.TaskRepository;
 import bi.seke.paymentservice.services.PackageUidService;
 import bi.seke.paymentservice.services.PriceService;
 import bi.seke.paymentservice.strategies.ConfirmationRetryStrategy;
+import bi.seke.paymentservice.strategies.ConfirmationStrategy;
+import bi.seke.schema.paymentservice.ConfirmationStatus;
 import bi.seke.schema.paymentservice.PaymentDTO;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -25,29 +27,38 @@ import java.util.function.Supplier;
 @Log4j2
 public class DefaultConfirmationRetryStrategy implements ConfirmationRetryStrategy {
     protected final PriceService priceService;
-    protected final TaskScheduler taskScheduler;
+    protected final ConfirmationStrategy confirmationStrategy;
+    protected final TaskScheduler psTaskScheduler;
     protected final Configurations configurations;
     protected final TaskRepository taskRepository;
     protected final PackageUidService packageUidService;
     protected final CustomerRepository customerRepository;
 
+    @Override
+    public void startConfirmationRetryTasks(PaymentDTO payment) {
+        taskRepository.findByPackageUid(payment.getPackageUid()).ifPresent(task -> {
+            task.setRetries(0);
+            task.setMaxRetriesReached(false);
+            taskRepository.save(task);
+        });
+
+        createRetryConfirmation(payment);
+    }
 
     @Override
     public void createRetryConfirmation(final PaymentDTO payment) {
-        log.info("Creating Task for retrying the payment confirmation for {}", payment::getPackageUid);
+        log.debug("Creating Task for retrying the payment confirmation for {}", payment::getPackageUid);
 
         taskRepository.findByPackageUid(payment.getPackageUid())
                 .or(getTaskDocumentCreator(payment))
-                .filter(task -> task.getRetries() < configurations.getPriceMismatchRetries())
-                .ifPresent(task -> {
-                    task.setRetries(task.getRetries() + 1);
-                    taskScheduler.schedule(() -> retryConfirmation(payment), getStartTime(task.getRetries()));
-                    taskRepository.save(task);
-                });
+                .filter(task -> !task.isMaxRetriesReached())
+                .ifPresent(task -> psTaskScheduler.schedule(
+                        () -> retryConfirmation(payment, task), getStartTime(task.getRetries())
+                ));
     }
 
     /**
-     * Finds the price for {@link PaymentDTO#packageUid} and checks if is paid and return the overcharged amount to the customer<br>
+     * Finds the price for {@link PaymentDTO#packageUid} and checks if is paid then checks if {@link PaymentDTO#amount} > 0 and return the overcharged amount to the customer<br>
      * otherwise returns the {@link PaymentDTO#amount} to the customer account
      *
      * @param payment paument confirmation
@@ -56,16 +67,13 @@ public class DefaultConfirmationRetryStrategy implements ConfirmationRetryStrate
         final String customerUid = packageUidService.decodeCustomerUid(payment.getPackageUid());
         final Double difference = getDifference(payment);
         final Boolean paid = priceService.isPaid(payment.getPackageUid());
+        final Double toBeReturned = paid && payment.getAmount() > 0 ? Math.abs(difference) : payment.getAmount();
 
-        final Double toBeReturned = paid ? Math.abs(difference) : payment.getAmount();
-        log.info("Returning {} to the customer {}", toBeReturned, customerUid);
-
-        customerRepository.findByCustomerUid(customerUid)
-                .or(getCustomerCreator(customerUid))
-                .ifPresent(customer -> {
-                    customer.setBalance(customer.getBalance() + toBeReturned);
-                    customerRepository.save(customer);
-                });
+        customerRepository.findByCustomerUid(customerUid).or(getCustomerCreator(customerUid)).filter(customer -> toBeReturned > 0).ifPresent(customer -> {
+            log.debug("Returning {} to the customer {}", toBeReturned, customerUid);
+            customer.setBalance(customer.getBalance() + toBeReturned);
+            customerRepository.save(customer);
+        });
     }
 
 
@@ -75,23 +83,27 @@ public class DefaultConfirmationRetryStrategy implements ConfirmationRetryStrate
      *
      * @param payment
      */
-    protected void retryConfirmation(final PaymentDTO payment) {
-        if (getDifference(payment) != 0) {
-            log.info("Retrying the payment confirmation for {}", payment::getPackageUid);
-            priceService.confirmPayment(payment);
+    protected void retryConfirmation(final PaymentDTO payment, final TaskDocument task) {
+        if (Objects.equals(task.getRetries(), configurations.getPriceMismatchRetries())) {
+            task.setMaxRetriesReached(true);
+            returnPayment(payment);
         }
 
-        taskRepository.findByPackageUid(payment.getPackageUid())
-                .filter(task -> Objects.equals(task.getRetries(), configurations.getPriceMismatchRetries()))
-                .ifPresent(task -> {
-                    task.setMaxRetriesReached(true);
-                    taskRepository.save(task);
-                    returnPayment(payment);
-                });
+        task.setRetries(task.getRetries() + 1);
+        taskRepository.save(task);
+
+        if (getDifference(payment) != 0 && !task.isMaxRetriesReached()) {
+            log.debug("Retrying the payment confirmation for {}, pass {}", payment.getPackageUid(), task.getRetries());
+
+            Optional.of(confirmationStrategy.createAndSendConfirmation(payment)).filter(confirmation -> confirmation.getStatus() != ConfirmationStatus.ACCEPTED).ifPresent(confirmation -> {
+                log.debug("Payment for {} will be retried as, {}", payment.getPackageUid(), confirmation.getMessage());
+                createRetryConfirmation(payment);
+            });
+        }
     }
 
     protected Instant getStartTime(final Integer retries) {
-        final int delay = configurations.getPriceMismatchRetryDelay() * retries;
+        final int delay = configurations.getPriceMismatchRetryDelay() * (retries + 1);
         return Instant.now().plusSeconds(delay);
     }
 
@@ -114,8 +126,6 @@ public class DefaultConfirmationRetryStrategy implements ConfirmationRetryStrate
     }
 
     protected Double getDifference(PaymentDTO payment) {
-        return priceService.getPrice(payment.getPackageUid())
-                .map(price -> price.getAmount() - payment.getAmount())
-                .orElse(0d);
+        return priceService.getPrice(payment.getPackageUid()).map(price -> payment.getAmount() - price.getAmount()).orElse(0d);
     }
 }

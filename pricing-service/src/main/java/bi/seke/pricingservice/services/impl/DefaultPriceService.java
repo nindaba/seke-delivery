@@ -16,6 +16,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 import static bi.seke.pricingservice.configurations.Configurations.PRICES_CACHE;
 
@@ -41,20 +42,26 @@ public class DefaultPriceService implements PriceService {
                 .stream().reduce(Double::sum)
                 .ifPresent(price::setAmount);
 
-        repository.save(convertPrice(price));
+        savePrice(price);
         return price;
     }
 
-    protected DefinitePriceEntity convertPrice(final PriceDTO price) {
-        final DefinitePriceEntity target = new DefinitePriceEntity();
-        final PricePK pk = new PricePK();
+    protected void savePrice(final PriceDTO price) {
+        repository.findAllByPkPackageUid(price.getPackageUid())
+                .or(() -> {
+                    final DefinitePriceEntity target = new DefinitePriceEntity();
+                    final PricePK pk = new PricePK();
 
-        pk.setPackageUid(price.getPackageUid());
-        pk.setUid(price.getUid());
-        target.setPk(pk);
-        target.setAmount(price.getAmount());
-
-        return target;
+                    pk.setPackageUid(price.getPackageUid());
+                    pk.setUid(price.getUid());
+                    target.setPk(pk);
+                    return Optional.of(target);
+                })
+                .map(target -> {
+                    target.setAmount(price.getAmount());
+                    price.setUid(target.getPk().getUid());
+                    return target;
+                }).ifPresent(repository::save);
     }
 
     @Override

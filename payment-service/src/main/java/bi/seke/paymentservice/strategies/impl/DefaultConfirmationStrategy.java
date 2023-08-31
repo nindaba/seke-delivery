@@ -3,7 +3,6 @@ package bi.seke.paymentservice.strategies.impl;
 import bi.seke.paymentservice.configurations.Configurations;
 import bi.seke.paymentservice.exceptions.WritingException;
 import bi.seke.paymentservice.services.PriceService;
-import bi.seke.paymentservice.strategies.ConfirmationRetryStrategy;
 import bi.seke.paymentservice.strategies.ConfirmationStrategy;
 import bi.seke.schema.paymentservice.ConfirmationDTO;
 import bi.seke.schema.paymentservice.ConfirmationStatus;
@@ -23,37 +22,34 @@ import java.util.function.Function;
 @Log4j2
 public class DefaultConfirmationStrategy implements ConfirmationStrategy {
     protected final PriceService priceService;
-    protected final KafkaTemplate<String, ConfirmationDTO> template;
+    protected final KafkaTemplate<String, Serializable> template;
     protected final Configurations configurations;
-    protected final ConfirmationRetryStrategy retryStrategy;
 
     @Override
-    public void createAndSendConfirmation(PaymentDTO payment) {
-
-        final ConfirmationDTO confirmation = new ConfirmationDTO();
+    public ConfirmationDTO createAndSendConfirmation(PaymentDTO payment) {
         final ConfirmationStatus status = priceService.getPrice(payment.getPackageUid())
                 .map(getPaymentStatus(payment))
                 .orElse(ConfirmationStatus.REJECTED);
-        confirmation.setStatus(status);
+        final ConfirmationDTO confirmation = createConfirmation(payment, status);
 
-        log.info("Created Confirmation for {} with status {}", confirmation.getPackageUid(), confirmation.getStatus());
+        log.debug("Created Confirmation for {} with status {}", confirmation.getPackageUid(), confirmation.getStatus());
+        priceService.reset(payment.getPackageUid());
 
         if (configurations.getAcceptedConfirmationStatuses().contains(status)) {
-
             priceService.markPaid(payment.getPackageUid());
-            setMessage(confirmation);
             template.send(configurations.getPaidTopicName(), payment.getPackageUid(), confirmation)
                     .whenComplete(this::logKafkaResults);
         }
+        return confirmation;
+    }
 
-        if (status != ConfirmationStatus.ACCEPTED) {
-            log.info("""
-                            Payment for {} has status {} and it will be retried as the charged amount does not match the price,\s
-                            such that the overcharged amount can be returned in case the price does not change,\s
-                            or return the payment in case does not match the price""",
-                    payment.getPackageUid(), status);
-            retryStrategy.createRetryConfirmation(payment);
-        }
+    protected ConfirmationDTO createConfirmation(final PaymentDTO payment, final ConfirmationStatus status) {
+        final ConfirmationDTO confirmation = new ConfirmationDTO();
+
+        confirmation.setPackageUid(payment.getPackageUid());
+        confirmation.setStatus(status);
+        setMessage(confirmation, payment.getAmount());
+        return confirmation;
     }
 
     protected Function<PriceDTO, ConfirmationStatus> getPaymentStatus(PaymentDTO payment) {
@@ -62,16 +58,19 @@ public class DefaultConfirmationStrategy implements ConfirmationStrategy {
                         ConfirmationStatus.REJECTED);
     }
 
-    private void setMessage(final ConfirmationDTO confirmation) {
+    private void setMessage(final ConfirmationDTO confirmation, final Double paid) {
         if (confirmation.getStatus() != ConfirmationStatus.ACCEPTED) {
-            confirmation.setMessage("This confirmation will be repeated since the paid amount does not match the price ⚠️");
+            priceService.getPrice(confirmation.getPackageUid())
+                    .ifPresent(price -> confirmation
+                            .setMessage("The paid amount %s does not match the price %s".formatted(paid, price.getAmount()))
+                    );
         } else {
             confirmation.setMessage("Confirmed ✅");
         }
     }
 
 
-    protected void logKafkaResults(final SendResult<String, ? extends Serializable> results, final Throwable throwable) {
+    protected void logKafkaResults(final SendResult<String, Serializable> results, final Throwable throwable) {
         if (throwable != null) {
             log.error("Could not send the Package to kafka topic", throwable);
             throw new WritingException(throwable);

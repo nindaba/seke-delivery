@@ -1,8 +1,9 @@
+logging.level:
+  bi.seke.: DEBUG
 spring:
   application.name: Pricing-Service
   mvc.servlet.path: /pricing
   profiles.include: price-config
-
   cassandra:
     schema-action: recreate
     local-datacenter: datacenter1
@@ -43,3 +44,4 @@ config:
   package-topic-name: PackageTopic
   route-topic-name: RouteTopic
   pricing-topic-clean-policy: compact,delete
+

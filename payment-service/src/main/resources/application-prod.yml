@@ -3,3 +3,7 @@ spring:
   kafka:
     bootstrap-servers: pl-kafka-broker-0:9092
     admin.auto-create: true
+
+config:
+  price-mismatch-retries: 3
+  price-mismatch-retry-delay: 3

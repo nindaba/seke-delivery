@@ -4,7 +4,10 @@ import bi.seke.schema.paymentservice.ConfirmationStatus;
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.task.TaskSchedulerBuilder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -36,4 +39,9 @@ public class Configurations {
     private String pricingTopicName;
     private String cancelTopicName;
     private String paidTopicCleanPolicy;
+
+    @Bean
+    protected ThreadPoolTaskScheduler psTaskScheduler(TaskSchedulerBuilder builder) {
+        return builder.build();
+    }
 }
