@@ -1,0 +1,35 @@
+spring:
+  application.name: Tracking-Service
+  mvc.servlet.path: /tracking
+
+  cassandra:
+    schema-action: recreate
+    local-datacenter: datacenter1
+    keyspace-name: tracking_1_0
+
+    connection:
+      connect-timeout: 10s
+      init-query-timeout: 10s
+    contact-points:
+      - localhost
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    admin.auto-create: true
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      bootstrap-servers: ${spring.kafka.bootstrap-servers}
+      properties:
+        spring.json.trusted.packages: bi.seke.schema
+    consumer:
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      bootstrap-servers: ${spring.kafka.bootstrap-servers}
+      group-id: ${spring.application.name}
+      properties:
+        spring.json.trusted.packages: bi.seke.schema.*
+
+config:
+  cancel-topic-name: CancelTopic
+  paid-topic-name: PaidTopic
+  tracking-topic-name: TrackingTopic
+  tracking-topic-clean-policy: compact,delete
